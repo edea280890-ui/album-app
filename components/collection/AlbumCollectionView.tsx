@@ -1,0 +1,180 @@
+﻿"use client";
+
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
+
+import AlbumOpeningCinematic from "@/components/AlbumOpeningCinematic";
+import AlbumPage from "@/components/AlbumPage";
+import { ALBUM_PAGES } from "@/data/albumConfig";
+import { useAlbumGame } from "@/context/AlbumGameContext";
+
+export default function AlbumCollectionView() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const [introDismissed, setIntroDismissed] =
+    useState(false);
+  const showIntro =
+    !introDismissed &&
+    searchParams.get("intro") === "1";
+
+  const finishIntro = () => {
+    setIntroDismissed(true);
+    router.replace("/album");
+  };
+
+  const {
+    album,
+    selectedPage,
+    pageTransition,
+    pageTurnDirection,
+    selectedPageIndex,
+    previousPage,
+    nextPage,
+    currentPageCards,
+    currentPageCompleted,
+    setSelectedCard,
+    changeAlbumPage,
+    getPageCards,
+    getPageCompletedCount
+  } = useAlbumGame();
+
+  const pageTotal = currentPageCards.length;
+  const isCurrentPageComplete =
+    pageTotal > 0 &&
+    currentPageCompleted === pageTotal;
+
+  return (
+    <section className="section-transition album-section-cinematic album-table-section">
+      {showIntro && (
+        <AlbumOpeningCinematic onFinish={finishIntro} />
+      )}
+
+      <div className="album-table-bg" aria-hidden="true" />
+      <div className="album-table-vignette" aria-hidden="true" />
+      <div className="album-table-light" aria-hidden="true" />
+      <div className="album-table-dust" aria-hidden="true">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <div className="album-stage">
+        <header className="album-hero-header">
+          <span>Album fisico</span>
+          <h1>Argentina Historica</h1>
+          <p>
+            Un album historico abierto sobre la mesa: cada decada conserva
+            sus huecos, sus figuritas pegadas y el pulso de la coleccion.
+          </p>
+        </header>
+
+        <div
+          className={
+            isCurrentPageComplete
+              ? "album-spread-status album-spread-status-complete"
+              : "album-spread-status"
+          }
+        >
+          <div>
+            <span>Decada seleccionada</span>
+            <strong>{selectedPage}</strong>
+          </div>
+
+          <p>
+            {currentPageCompleted}/{pageTotal}
+            {" "}
+            espacios completados
+          </p>
+        </div>
+
+        <div className="album-navigation album-physical-navigation">
+          <button
+            type="button"
+            className="page-turn-button page-turn-button-left"
+            onClick={() =>
+              changeAlbumPage(previousPage, "previous")
+            }
+            aria-label="Pagina anterior"
+          >
+            &lt;
+          </button>
+
+          <div className="album-page-tabs">
+            {ALBUM_PAGES.map((page) => {
+              const pageTotalForTab =
+                getPageCards(page).length;
+              const pageCompleted =
+                getPageCompletedCount(page);
+              const targetIndex =
+                ALBUM_PAGES.indexOf(page);
+              const direction =
+                targetIndex > selectedPageIndex
+                  ? "next"
+                  : "previous";
+              const isComplete =
+                pageTotalForTab > 0 &&
+                pageCompleted === pageTotalForTab;
+
+              const tabClass = [
+                "album-page-tab",
+                selectedPage === page
+                  ? "album-page-tab-active"
+                  : "",
+                isComplete
+                  ? "album-page-tab-complete"
+                  : ""
+              ].filter(Boolean).join(" ");
+
+              return (
+                <button
+                  key={page}
+                  type="button"
+                  onClick={() =>
+                    changeAlbumPage(page, direction)
+                  }
+                  className={tabClass}
+                >
+                  <span className="album-page-tab-label">
+                    {page}
+                  </span>
+
+                  <span className="album-page-tab-count">
+                    {pageCompleted}/{pageTotalForTab}
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+
+          <button
+            type="button"
+            className="page-turn-button page-turn-button-right"
+            onClick={() =>
+              changeAlbumPage(nextPage, "next")
+            }
+            aria-label="Pagina siguiente"
+          >
+            &gt;
+          </button>
+        </div>
+
+        <div
+          className={
+            pageTransition
+              ? `album-page-turning album-page-turning-${pageTurnDirection}`
+              : "album-page-idle"
+          }
+        >
+          <AlbumPage
+            key={selectedPage}
+            pagina={selectedPage}
+            album={album}
+            onViewCard={setSelectedCard}
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+

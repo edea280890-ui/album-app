@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 
 type Props = {
   openingPack: boolean;
@@ -19,7 +19,15 @@ export default function PackOpening({
             : "real-pack"
         }
       >
+        <div className="pack-tactile-aura" aria-hidden="true"></div>
+        <div className="pack-reward-sparks" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
         <div className="pack-light"></div>
+        <div className="pack-inner-glow-core" aria-hidden="true"></div>
         <div className="pack-dust pack-dust-a"></div>
         <div className="pack-dust pack-dust-b"></div>
         <div className="pack-dust pack-dust-c"></div>
@@ -41,6 +49,16 @@ export default function PackOpening({
         </div>
 
         <div className="real-pack-back"></div>
+        <div className="pack-printed-skin" aria-hidden="true">
+          <Image
+            src="/assets/hub/paquete-principal-clean.png"
+            alt=""
+            fill
+            sizes="340px"
+            className="pack-printed-skin-image"
+            priority
+          />
+        </div>
         <div className="pack-foil-grain"></div>
         <div className="pack-metal-sheen"></div>
         <div className="pack-side-rail pack-side-rail-left"></div>
@@ -53,6 +71,10 @@ export default function PackOpening({
         </div>
 
         <div className="pack-front-brand pack-front-brand-base">
+          <div className="pack-brand-ingot" aria-hidden="true">
+            ARGENTINA HISTORICA
+          </div>
+
           <div className="pack-logo-plate">
             <Image
               src="/brand/pack-shield-clean.png"
@@ -65,12 +87,22 @@ export default function PackOpening({
           </div>
 
           <div className="pack-front-copy">
-            <strong>ALBUM HISTORICO</strong>
-            <span>Figuritas Argentinas</span>
+            <strong>ARGENTINA HISTORICA</strong>
+            <span>Figuritas historicas</span>
           </div>
         </div>
 
         <div className="pack-tear-layer">
+          <div className="pack-tear-print-skin" aria-hidden="true">
+            <Image
+              src="/assets/hub/paquete-principal-clean.png"
+              alt=""
+              fill
+              sizes="340px"
+              className="pack-tear-print-skin-image"
+              priority
+            />
+          </div>
           <div className="pack-side-stripe pack-side-stripe-left"></div>
           <div className="pack-side-stripe pack-side-stripe-right"></div>
 
@@ -106,3 +138,5 @@ export default function PackOpening({
     </div>
   );
 }
+
+

@@ -1,4 +1,13 @@
+﻿"use client";
+
 import Image from "next/image";
+import type { CSSProperties } from "react";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from "react";
 import { Card } from "../types/Card";
 import { masterCards } from "../data/cards";
 import { getCardStyle } from "../lib/getCardStyle";
@@ -9,11 +18,70 @@ type Props = {
   onViewCard?: (card: Card) => void;
 };
 
+const getDecadeMood = (pagina: string) => {
+  const decade = Number(pagina);
+
+  if (decade <= 1810) {
+    return "independencia";
+  }
+
+  if (decade <= 1830) {
+    return "frontera";
+  }
+
+  if (decade <= 1850) {
+    return "confederacion";
+  }
+
+  if (decade <= 1870) {
+    return "republica";
+  }
+
+  return "memoria";
+};
+
 export default function AlbumPage({
   pagina,
   album,
   onViewCard
 }: Props) {
+  const [recentlyPastedCode, setRecentlyPastedCode] =
+    useState<string | null>(null);
+  const previousAlbumCodes = useRef<Set<string> | null>(
+    null
+  );
+
+  const albumCodes = useMemo(
+    () => new Set(album.map((card) => card.codigo)),
+    [album]
+  );
+
+  useEffect(() => {
+    const previousCodes = previousAlbumCodes.current;
+
+    if (previousCodes) {
+      const newCode = Array.from(albumCodes).find(
+        (code) => !previousCodes.has(code)
+      );
+
+      if (newCode) {
+        setRecentlyPastedCode(newCode);
+
+        const timeout = window.setTimeout(() => {
+          setRecentlyPastedCode(null);
+        }, 1350);
+
+        previousAlbumCodes.current = albumCodes;
+
+        return () => window.clearTimeout(timeout);
+      }
+    }
+
+    previousAlbumCodes.current = albumCodes;
+
+    return undefined;
+  }, [albumCodes]);
+
   const cardsFromPage = masterCards.filter(
     (card) =>
       card.pagina === pagina &&
@@ -38,15 +106,19 @@ export default function AlbumPage({
   const isPageCompleted =
     cardsFromPage.length > 0 &&
     completedCount === cardsFromPage.length;
+  const decadeMood = getDecadeMood(pagina);
 
   return (
-    <div className="album-page-scene">
+    <div
+      className={`album-page-scene album-decade-${decadeMood}`}
+    >
       <div className="album-book-shadow"></div>
+      <div className="album-book-page-stack" aria-hidden="true"></div>
 
       <div
         className={
           isPageCompleted
-            ? "album-physical-page album-page-complete"
+            ? "album-physical-page album-page-complete album-page-reward"
             : "album-physical-page"
         }
       >
@@ -54,6 +126,14 @@ export default function AlbumPage({
         <div className="album-paper-noise"></div>
         <div className="album-paper-stains"></div>
         <div className="album-page-wear"></div>
+        <div className="album-decade-atmosphere"></div>
+        <div className="album-complete-bloom" aria-hidden="true"></div>
+        <div className="album-inner-ornament ornament-top"></div>
+        <div className="album-inner-ornament ornament-bottom"></div>
+        <div className="album-inner-corner corner-top-left"></div>
+        <div className="album-inner-corner corner-top-right"></div>
+        <div className="album-inner-corner corner-bottom-left"></div>
+        <div className="album-inner-corner corner-bottom-right"></div>
         <div className="album-physical-page-spine"></div>
         <div className="album-physical-page-left"></div>
         <div className="album-physical-page-right"></div>
@@ -65,6 +145,10 @@ export default function AlbumPage({
             </span>
 
             <h2>Decada de {pagina}</h2>
+
+            <p className="album-page-subtitle">
+              Argentina Historica
+            </p>
           </div>
 
           <span className="album-page-counter">
@@ -73,7 +157,7 @@ export default function AlbumPage({
         </div>
 
         <div className="album-slots-grid">
-          {cardsFromPage.map((card) => {
+          {cardsFromPage.map((card, index) => {
             const fusedHito = card.hitoId
               ? album.find(
                   (albumCard) =>
@@ -95,6 +179,28 @@ export default function AlbumPage({
               .toLowerCase()
               .normalize("NFD")
               .replace(/[\u0300-\u036f]/g, "");
+            const isHitoSlot =
+              Boolean(fusedHito) ||
+              visibleCard.rareza === "Hito" ||
+              Boolean(card.hitoId);
+            const isJustPasted =
+              pasted &&
+              visibleCard.codigo === recentlyPastedCode;
+
+            const slotClass = pasted
+              ? [
+                  "album-slot",
+                  "album-slot-pasted",
+                  `album-slot-${rarityClass}`,
+                  isJustPasted ? "album-slot-just-pasted" : "",
+                  isHitoSlot ? "album-slot-hito" : "",
+                  `card-frame card-frame-${rarityClass}`
+                ].filter(Boolean).join(" ")
+              : [
+                  "album-slot",
+                  "album-slot-empty",
+                  isHitoSlot ? "album-slot-empty-hito" : ""
+                ].filter(Boolean).join(" ");
 
             return (
               <button
@@ -103,11 +209,7 @@ export default function AlbumPage({
                 onClick={() =>
                   pasted && onViewCard?.(visibleCard)
                 }
-                className={
-                  pasted
-                    ? `album-slot card-frame card-frame-${rarityClass}`
-                    : "album-slot album-slot-empty"
-                }
+                className={slotClass}
                 style={{
                   border: pasted
                     ? cardStyle.border
@@ -123,11 +225,30 @@ export default function AlbumPage({
 
                   background: pasted
                     ? cardStyle.background
-                    : "rgba(20, 15, 10, 0.65)"
-                }}
+                    : "rgba(20, 15, 10, 0.65)",
+
+                  "--slot-index": index
+                } as CSSProperties}
               >
                 {pasted ? (
                   <>
+                    <span
+                      className="album-slot-settle-glow"
+                      aria-hidden="true"
+                    ></span>
+                    <span
+                      className="album-slot-settle-dust"
+                      aria-hidden="true"
+                    ></span>
+                    <span
+                      className="album-slot-adhesive album-slot-adhesive-top"
+                      aria-hidden="true"
+                    ></span>
+                    <span
+                      className="album-slot-adhesive album-slot-adhesive-bottom"
+                      aria-hidden="true"
+                    ></span>
+
                     <Image
                       src={visibleCard.imagen}
                       alt={visibleCard.nombre}
@@ -145,7 +266,7 @@ export default function AlbumPage({
                 ) : (
                   <>
                     <div className="album-slot-placeholder">
-                      ?
+                      <span>{index + 1}</span>
                     </div>
 
                     <strong>
@@ -169,3 +290,4 @@ export default function AlbumPage({
     </div>
   );
 }
+

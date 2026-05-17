@@ -1,4 +1,4 @@
-import Image from "next/image";
+﻿import Image from "next/image";
 import { getCardStyle } from "../lib/getCardStyle";
 import { Card } from "../types/Card";
 
@@ -20,13 +20,14 @@ export default function CardViewer({
   onClose
 }: Props) {
   const style = getCardStyle(card);
+
   const rarityClass = card.rareza
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
 
   return (
-    <div className="card-viewer-overlay">
+    <div className={`card-viewer-overlay card-viewer-overlay-${rarityClass}`}>
       <button
         className="card-viewer-backdrop"
         aria-label="Cerrar visor"
@@ -37,18 +38,31 @@ export default function CardViewer({
         className={`card-viewer card-viewer-${rarityClass}`}
         aria-label={`Detalle de ${card.nombre}`}
       >
+        <span
+          className="card-viewer-rarity-atmosphere"
+          aria-hidden="true"
+        ></span>
         <button
           className="card-viewer-close"
           onClick={onClose}
           aria-label="Cerrar"
         >
-          Ã—
+          x
         </button>
 
         <div
           className={`card-viewer-object card-frame card-frame-${rarityClass}`}
           style={style}
         >
+          <span
+            className="card-viewer-object-glow"
+            aria-hidden="true"
+          ></span>
+          <span
+            className="card-viewer-object-sheen"
+            aria-hidden="true"
+          ></span>
+
           <div
             className={
               card.rareza === "Dorada" ||
@@ -90,7 +104,7 @@ export default function CardViewer({
             </div>
 
             <div>
-              <dt>CÃ³digo</dt>
+              <dt>Codigo</dt>
               <dd>{card.codigo}</dd>
             </div>
 
@@ -100,14 +114,14 @@ export default function CardViewer({
             </div>
 
             <div>
-              <dt>PÃ¡gina</dt>
+              <dt>Pagina</dt>
               <dd>{card.pagina}</dd>
             </div>
           </dl>
 
           <p>
             {card.pista ??
-              "Pieza de la colecciÃ³n histÃ³rica argentina."}
+              "Pieza de la coleccion historica argentina."}
           </p>
 
           {card.esCombinable && (
