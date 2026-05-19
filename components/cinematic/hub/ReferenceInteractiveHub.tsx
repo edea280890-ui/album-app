@@ -129,12 +129,43 @@ export default function ReferenceInteractiveHub({
       <div className="ah-table-light" aria-hidden="true"></div>
       <div className="ah-table-vignette" aria-hidden="true"></div>
 
-      <div className="ah-dust" aria-hidden="true">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+      <div className="ah-historic-props" aria-hidden="true">
+        <span className="ah-prop ah-prop-map">
+          <Image
+            src="/assets/hub/argentina-historica-home-ai.png"
+            alt=""
+            fill
+            sizes="240px"
+            className="ah-prop-image ah-prop-map-image"
+          />
+        </span>
+        <span className="ah-prop ah-prop-quill">
+          <Image
+            src="/assets/hub/argentina-historica-home-ai.png"
+            alt=""
+            fill
+            sizes="280px"
+            className="ah-prop-image ah-prop-quill-image"
+          />
+        </span>
+        <span className="ah-prop ah-prop-compass">
+          <Image
+            src="/assets/hub/argentina-historica-home-ai.png"
+            alt=""
+            fill
+            sizes="160px"
+            className="ah-prop-image ah-prop-compass-image"
+          />
+        </span>
+        <span className="ah-prop ah-prop-books">
+          <Image
+            src="/assets/hub/argentina-historica-home-ai.png"
+            alt=""
+            fill
+            sizes="260px"
+            className="ah-prop-image ah-prop-books-image"
+          />
+        </span>
       </div>
 
       <div className="ah-object-stage">
@@ -151,6 +182,16 @@ export default function ReferenceInteractiveHub({
           <span className="ah-object-shadow"></span>
           <span className="ah-object-glow"></span>
 
+          <span className="ah-collection-lid" aria-hidden="true">
+            <Image
+              src="/assets/hub/argentina-historica-home-ai.png"
+              alt=""
+              fill
+              sizes="280px"
+              className="ah-collection-lid-image"
+            />
+          </span>
+
           <span className="ah-collection-tin">
             <Image
               src="/assets/hub/argentina-historica-home-ai.png"
@@ -160,6 +201,7 @@ export default function ReferenceInteractiveHub({
               className="ah-collection-tin-image"
             />
             <span className="ah-collection-tin-rim"></span>
+            <span className="ah-collection-metal-lip"></span>
           </span>
 
           <span className="ah-preview-stack">
@@ -178,6 +220,15 @@ export default function ReferenceInteractiveHub({
                 <span className="ah-preview-card-gloss"></span>
               </span>
             ))}
+            <span className="ah-loose-preview-card" aria-hidden="true">
+              <Image
+                src="/cards/historicas/sanmartin.png"
+                alt=""
+                fill
+                sizes="120px"
+                className="ah-loose-preview-card-image"
+              />
+            </span>
             <span className="ah-rubber-band"></span>
             <span className="ah-rubber-band-highlight"></span>
           </span>
@@ -195,7 +246,9 @@ export default function ReferenceInteractiveHub({
           <span className="ah-object-reader">Album</span>
           <span className="ah-object-shadow"></span>
           <span className="ah-object-glow"></span>
+          <span className="ah-album-contact-shadow"></span>
           <span className="ah-album-pages"></span>
+          <span className="ah-album-page-fore-edge"></span>
           <span className="ah-album-spine"></span>
           <span className="ah-album-cover">
             <Image
@@ -207,6 +260,8 @@ export default function ReferenceInteractiveHub({
               priority
             />
             <span className="ah-album-cover-gloss"></span>
+            <span className="ah-album-cover-bevel"></span>
+            <span className="ah-album-cover-wear"></span>
             <span className="ah-album-cover-depth"></span>
           </span>
         </button>
@@ -236,6 +291,10 @@ export default function ReferenceInteractiveHub({
                 className="ah-pack-photo-image"
                 priority={index === 1}
               />
+              <span className="ah-pack-brand-patch">
+                Argentina Historica
+              </span>
+              <span className="ah-pack-thickness"></span>
               <span className="ah-pack-foil"></span>
             </span>
           ))}
@@ -244,3 +303,4 @@ export default function ReferenceInteractiveHub({
     </section>
   );
 }
+

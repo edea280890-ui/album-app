@@ -40,6 +40,90 @@ const getDecadeMood = (pagina: string) => {
   return "memoria";
 };
 
+const decadeNarratives: Record<
+  string,
+  {
+    title: string;
+    description: string;
+    note: string;
+  }
+> = {
+  "1800": {
+    title: "Ecos del Virreinato",
+    description:
+      "El album abre con una epoca de tensiones, rutas comerciales y primeros signos de transformacion politica.",
+    note: "Cada espacio conserva una pista hasta que la figurita ocupa su lugar."
+  },
+  "1810": {
+    title: "La hora de Mayo",
+    description:
+      "La pagina respira cabildo, imprenta y decisiones urgentes: el inicio visible de una nueva vida politica.",
+    note: "Las piezas doradas y legendarias iluminan los nombres que empujaron la revolucion."
+  },
+  "1820": {
+    title: "Provincias en disputa",
+    description:
+      "Caudillos, pactos y territorios definen una decada de movimiento, frontera y lealtades cambiantes.",
+    note: "Los huecos impresos funcionan como memoria parcial antes del hallazgo."
+  },
+  "1830": {
+    title: "Frontera y poder",
+    description:
+      "El album se vuelve mas oscuro y terroso: alianzas, campanas y proyectos de orden atraviesan la pagina.",
+    note: "Los hitos combinables marcan escenas mayores que se completan por partes."
+  },
+  "1840": {
+    title: "Conflictos y exilios",
+    description:
+      "La historia se escribe entre debates, viajes, bloqueos y voces que imaginan otro pais posible.",
+    note: "Las figuritas pegadas quedan como documentos adheridos al papel."
+  },
+  "1850": {
+    title: "Organizacion nacional",
+    description:
+      "La pagina toma tono institucional: acuerdos, constitucion y nuevas formas de pensar la republica.",
+    note: "Completar la decada enciende una calidez de logro sobre el pliego."
+  },
+  "1860": {
+    title: "Union y tensiones",
+    description:
+      "El album muestra una Argentina que intenta reunirse sin perder sus fuerzas regionales ni sus disputas.",
+    note: "La luz lateral revela relieves, cintas y sombras de cada figurita."
+  },
+  "1870": {
+    title: "Estado en expansion",
+    description:
+      "Ferrocarriles, guerras, prensa y nuevas instituciones cambian el ritmo del territorio.",
+    note: "Las rarezas altas tienen presencia propia, como piezas de vitrina historica."
+  },
+  "1880": {
+    title: "Capital y modernizacion",
+    description:
+      "La decada ordena poder, ciudad y memoria publica mientras el pais acelera su transformacion.",
+    note: "Los espacios vacios conservan el codigo como si fueran marcas de imprenta."
+  },
+  "1890": {
+    title: "Crisis y reforma",
+    description:
+      "La pagina mezcla lujo gastado y agite politico: nuevas voces cuestionan el modo de gobernar.",
+    note: "El progreso de pagina funciona como una lectura fisica del album."
+  },
+  "1900": {
+    title: "Umbral del siglo",
+    description:
+      "El cierre mira hacia un pais que ya cambio de escala, con memoria acumulada y nuevos conflictos abiertos.",
+    note: "Completarla prepara el album para su conclusion narrativa."
+  }
+};
+
+const getDecadeNarrative = (pagina: string) =>
+  decadeNarratives[pagina] ?? {
+    title: "Memoria en construccion",
+    description:
+      "Esta decada conserva espacios, pistas y piezas que esperan entrar en la coleccion.",
+    note: "Cada figurita suma contexto historico al recorrido."
+  };
+
 export default function AlbumPage({
   pagina,
   album,
@@ -107,12 +191,23 @@ export default function AlbumPage({
     cardsFromPage.length > 0 &&
     completedCount === cardsFromPage.length;
   const decadeMood = getDecadeMood(pagina);
+  const decadeNarrative = getDecadeNarrative(pagina);
+  const pageProgress =
+    cardsFromPage.length > 0
+      ? `${(completedCount / cardsFromPage.length) * 100}%`
+      : "0%";
 
   return (
     <div
       className={`album-page-scene album-decade-${decadeMood}`}
+      style={
+        {
+          "--page-progress": pageProgress
+        } as CSSProperties
+      }
     >
       <div className="album-book-shadow"></div>
+      <div className="album-open-book-base" aria-hidden="true"></div>
       <div className="album-book-page-stack" aria-hidden="true"></div>
 
       <div
@@ -122,6 +217,10 @@ export default function AlbumPage({
             : "album-physical-page"
         }
       >
+        <div className="album-page-curl album-page-curl-left" aria-hidden="true"></div>
+        <div className="album-page-curl album-page-curl-right" aria-hidden="true"></div>
+        <div className="album-page-edge-layer album-page-edge-top" aria-hidden="true"></div>
+        <div className="album-page-edge-layer album-page-edge-bottom" aria-hidden="true"></div>
         <div className="album-page-light"></div>
         <div className="album-paper-noise"></div>
         <div className="album-paper-stains"></div>
@@ -151,10 +250,27 @@ export default function AlbumPage({
             </p>
           </div>
 
-          <span className="album-page-counter">
-            {completedCount}/{cardsFromPage.length}
-          </span>
+          <div className="album-page-progress-block">
+            <span className="album-page-counter">
+              {completedCount}/{cardsFromPage.length}
+            </span>
+            <span
+              className="album-page-progress-track"
+              aria-label={`Progreso de pagina ${completedCount} de ${cardsFromPage.length}`}
+            >
+              <span className="album-page-progress-fill"></span>
+            </span>
+          </div>
         </div>
+
+        <aside className="album-decade-note">
+          <div>
+            <span>Contexto de decada</span>
+            <h3>{decadeNarrative.title}</h3>
+          </div>
+          <p>{decadeNarrative.description}</p>
+          <small>{decadeNarrative.note}</small>
+        </aside>
 
         <div className="album-slots-grid">
           {cardsFromPage.map((card, index) => {
@@ -233,6 +349,14 @@ export default function AlbumPage({
                 {pasted ? (
                   <>
                     <span
+                      className="album-slot-contact"
+                      aria-hidden="true"
+                    ></span>
+                    <span
+                      className="album-slot-paper-depth"
+                      aria-hidden="true"
+                    ></span>
+                    <span
                       className="album-slot-settle-glow"
                       aria-hidden="true"
                     ></span>
@@ -267,6 +391,7 @@ export default function AlbumPage({
                   <>
                     <div className="album-slot-placeholder">
                       <span>{index + 1}</span>
+                      <i aria-hidden="true"></i>
                     </div>
 
                     <strong>
@@ -290,4 +415,6 @@ export default function AlbumPage({
     </div>
   );
 }
+
+
 

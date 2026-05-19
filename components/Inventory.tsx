@@ -82,6 +82,16 @@ const filterLabels: Record<InventoryFilter, string> = {
   repetidas: "Repetidas"
 };
 
+const filterClusterTones: Record<InventoryFilter, string> = {
+  todas: "todas",
+  simples: "simple",
+  especiales: "especial",
+  doradas: "dorada",
+  legendarias: "legendaria",
+  combinables: "combinable",
+  repetidas: "repetida"
+};
+
 const rarityClusters: Omit<InventoryCluster, "cards">[] = [
   {
     id: "simples",
@@ -137,7 +147,7 @@ const clusterCards = (
         id: activeFilter,
         label: filterLabels[activeFilter],
         detail: "Seleccion actual del pilon",
-        tone: activeFilter.replace(/s$/, ""),
+        tone: filterClusterTones[activeFilter],
         cards
       }
     ];
@@ -291,12 +301,14 @@ export default function Inventory({
             onClick={() =>
               setActiveFilter(filter.id)
             }
+            aria-pressed={activeFilter === filter.id}
             className={
               activeFilter === filter.id
-                ? "inventory-filter-chip inventory-filter-chip-active"
-                : "inventory-filter-chip"
+                ? `inventory-filter-chip inventory-filter-chip-${filter.id} inventory-filter-chip-active`
+                : `inventory-filter-chip inventory-filter-chip-${filter.id}`
             }
           >
+            <span className="inventory-filter-notch" aria-hidden="true"></span>
             <span>{filter.label}</span>
             <strong>{getFilterCount(filter.id)}</strong>
           </button>
@@ -314,6 +326,8 @@ export default function Inventory({
               key={cluster.id}
               className={`inventory-rarity-cluster inventory-rarity-cluster-${cluster.tone}`}
             >
+              <span className="inventory-cluster-surface" aria-hidden="true"></span>
+              <span className="inventory-cluster-thread" aria-hidden="true"></span>
               <header className="inventory-cluster-header">
                 <div>
                   <span>{cluster.detail}</span>
@@ -351,6 +365,26 @@ export default function Inventory({
                       }`}
                       style={cardStyle}
                     >
+                      <span
+                        className="inventory-card-contact-shadow"
+                        aria-hidden="true"
+                      ></span>
+                      {card.cantidad > 1 && (
+                        <>
+                          <span
+                            className="inventory-card-stack-sheet inventory-card-stack-sheet-a"
+                            aria-hidden="true"
+                          ></span>
+                          <span
+                            className="inventory-card-stack-sheet inventory-card-stack-sheet-b"
+                            aria-hidden="true"
+                          ></span>
+                          <span
+                            className="inventory-card-elastic"
+                            aria-hidden="true"
+                          ></span>
+                        </>
+                      )}
                       <span
                         className="physical-card-paper-edge"
                         aria-hidden="true"
@@ -428,4 +462,6 @@ export default function Inventory({
     </section>
   );
 }
+
+
 
