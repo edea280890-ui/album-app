@@ -1,4 +1,5 @@
-﻿import Image from "next/image";
+import Image from "next/image";
+import { getHitoById } from "../data/hitos";
 import { getCardStyle } from "../lib/getCardStyle";
 import { Card } from "../types/Card";
 
@@ -20,6 +21,7 @@ export default function CardViewer({
   onClose
 }: Props) {
   const style = getCardStyle(card);
+  const hito = getHitoById(card.hitoId);
 
   const rarityClass = card.rareza
     .toLowerCase()
@@ -128,6 +130,21 @@ export default function CardViewer({
             <p>
               Esta figurita forma parte de un hito combinable.
             </p>
+          )}
+
+          {hito && (
+            <div className="card-viewer-hito-story">
+              <span>Hito historico</span>
+              <h4>{hito.titulo}</h4>
+              <p>{hito.contexto}</p>
+              <blockquote>{hito.frase}</blockquote>
+              <small>{hito.curiosidad}</small>
+              {card.esCombinable && (
+                <strong>
+                  Pieza {card.parte}/{card.partesTotales}
+                </strong>
+              )}
+            </div>
           )}
         </aside>
       </section>

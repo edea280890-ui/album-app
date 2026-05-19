@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import type { CSSProperties } from "react";
@@ -10,6 +10,7 @@ import {
 } from "react";
 import { Card } from "../types/Card";
 import { masterCards } from "../data/cards";
+import { historicalHitos } from "../data/hitos";
 import { getCardStyle } from "../lib/getCardStyle";
 
 type Props = {
@@ -196,6 +197,59 @@ export default function AlbumPage({
     cardsFromPage.length > 0
       ? `${(completedCount / cardsFromPage.length) * 100}%`
       : "0%";
+  const pageHitos = useMemo(
+    () =>
+      historicalHitos
+        .filter((hito) => hito.pagina === pagina)
+        .map((hito) => {
+          const hitoParts = masterCards
+            .filter(
+              (card) =>
+                card.esCombinable &&
+                card.hitoId === hito.id
+            )
+            .sort(
+              (firstCard, secondCard) =>
+                (firstCard.parte ?? 0) -
+                (secondCard.parte ?? 0)
+            );
+          const unlocked = album.some(
+            (albumCard) =>
+              albumCard.rareza === "Hito" &&
+              albumCard.hitoId === hito.id
+          );
+          const pastedParts = new Set(
+            album
+              .filter(
+                (albumCard) =>
+                  albumCard.esCombinable &&
+                  albumCard.hitoId === hito.id
+              )
+              .map((albumCard) => albumCard.parte ?? 0)
+          );
+          const totalParts =
+            hitoParts.length || hito.partesEsperadas;
+          const completedParts = unlocked
+            ? totalParts
+            : pastedParts.size;
+
+          return {
+            ...hito,
+            completedParts,
+            totalParts,
+            unlocked,
+            missingParts: unlocked
+              ? []
+              : hitoParts
+                .filter(
+                  (partCard) =>
+                    !pastedParts.has(partCard.parte ?? 0)
+                )
+                .map((partCard) => partCard.nombre)
+          };
+        }),
+    [album, pagina]
+  );
 
   return (
     <div
@@ -234,6 +288,7 @@ export default function AlbumPage({
         <div className="album-inner-corner corner-bottom-left"></div>
         <div className="album-inner-corner corner-bottom-right"></div>
         <div className="album-physical-page-spine"></div>
+        <div className="album-page-gutter-shadow" aria-hidden="true"></div>
         <div className="album-physical-page-left"></div>
         <div className="album-physical-page-right"></div>
 
@@ -271,6 +326,59 @@ export default function AlbumPage({
           <p>{decadeNarrative.description}</p>
           <small>{decadeNarrative.note}</small>
         </aside>
+
+        {pageHitos.length > 0 && (
+          <section className="album-hito-ledger">
+            <div className="album-hito-ledger-title">
+              <span>Hitos en reconstruccion</span>
+              <strong>Escenas historicas</strong>
+            </div>
+
+            <div className="album-hito-ledger-list">
+              {pageHitos.map((hito) => (
+                <article
+                  key={hito.id}
+                  className={
+                    hito.unlocked
+                      ? "album-hito-card album-hito-card-unlocked"
+                      : "album-hito-card"
+                  }
+                  style={
+                    {
+                      "--hito-progress":
+                        hito.totalParts > 0
+                          ? `${(hito.completedParts / hito.totalParts) * 100}%`
+                          : "0%"
+                    } as CSSProperties
+                  }
+                >
+                  <div>
+                    <span>{hito.escena}</span>
+                    <h3>{hito.titulo}</h3>
+                    <p>{hito.resumen}</p>
+                  </div>
+
+                  <div className="album-hito-progress">
+                    <strong>
+                      {hito.completedParts}/{hito.totalParts}
+                    </strong>
+                    <span>
+                      <i></i>
+                    </span>
+                  </div>
+
+                  <small>
+                    {hito.unlocked
+                      ? hito.recompensa
+                      : hito.missingParts.length > 0
+                        ? `Falta: ${hito.missingParts.join(" / ")}`
+                        : "Busca las piezas combinables del hito"}
+                  </small>
+                </article>
+              ))}
+            </div>
+          </section>
+        )}
 
         <div className="album-slots-grid">
           {cardsFromPage.map((card, index) => {
@@ -353,6 +461,24 @@ export default function AlbumPage({
                       aria-hidden="true"
                     ></span>
                     <span
+                      className="album-slot-laminate"
+                      aria-hidden="true"
+                    ></span>
+                    <span
+                      className="album-slot-rarity-stamp"
+                      aria-hidden="true"
+                    >
+                      {visibleCard.rareza}
+                    </span>
+                    {isHitoSlot && (
+                      <span
+                        className="album-slot-hito-seal"
+                        aria-hidden="true"
+                      >
+                        Hito
+                      </span>
+                    )}
+                    <span
                       className="album-slot-paper-depth"
                       aria-hidden="true"
                     ></span>
@@ -389,6 +515,14 @@ export default function AlbumPage({
                   </>
                 ) : (
                   <>
+                    <span
+                      className="album-slot-empty-adhesive album-slot-empty-adhesive-a"
+                      aria-hidden="true"
+                    ></span>
+                    <span
+                      className="album-slot-empty-adhesive album-slot-empty-adhesive-b"
+                      aria-hidden="true"
+                    ></span>
                     <div className="album-slot-placeholder">
                       <span>{index + 1}</span>
                       <i aria-hidden="true"></i>
@@ -415,6 +549,7 @@ export default function AlbumPage({
     </div>
   );
 }
+
 
 
 

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -32,6 +32,9 @@ export default function AlbumCollectionView() {
     nextPage,
     currentPageCards,
     currentPageCompleted,
+    pastedCount,
+    completionPercentage,
+    progression,
     setSelectedCard,
     changeAlbumPage,
     getPageCards,
@@ -52,6 +55,11 @@ export default function AlbumCollectionView() {
       <div className="album-table-bg" aria-hidden="true" />
       <div className="album-table-vignette" aria-hidden="true" />
       <div className="album-table-light" aria-hidden="true" />
+      <div className="album-table-props" aria-hidden="true">
+        <span className="album-table-prop album-table-prop-map"></span>
+        <span className="album-table-prop album-table-prop-thread"></span>
+        <span className="album-table-prop album-table-prop-wax"></span>
+      </div>
       <div className="album-table-dust" aria-hidden="true">
         <span></span>
         <span></span>
@@ -86,7 +94,69 @@ export default function AlbumCollectionView() {
             {" "}
             espacios completados
           </p>
+
+          <div className="album-total-progress">
+            <span>Album total</span>
+            <strong>
+              {pastedCount} piezas - {completionPercentage}%
+            </strong>
+          </div>
         </div>
+
+        <section className="album-progression-relic" aria-label="Progreso de Argentina Historica">
+          <div className="album-progression-medallion">
+            <span>{completionPercentage}%</span>
+            <strong>{progression.completionLabel}</strong>
+          </div>
+
+          <div className="album-progression-cards">
+            <article className="album-progression-card">
+              <span>Decadas completas</span>
+              <strong>
+                {progression.completedPagesCount}/{progression.totalPages}
+              </strong>
+              <small>
+                {progression.completedPages.length > 0
+                  ? progression.completedPages.join(" - ")
+                  : "Ninguna cerrada todavia"}
+              </small>
+            </article>
+
+            <article className="album-progression-card album-progression-card-discovery">
+              <span>Piezas descubiertas</span>
+              <strong>
+                {progression.obtainedUniqueCount}/{progression.totalCollectibleCards}
+              </strong>
+              <small>Modelos vistos entre pilon y album</small>
+            </article>
+
+            <article className="album-progression-card album-progression-card-hito">
+              <span>Hitos historicos</span>
+              <strong>
+                {progression.unlockedHitosCount}/{progression.totalHitos}
+              </strong>
+              <small>{progression.nextHitoTitle}: {progression.nextHitoCompleted}/{progression.nextHitoTotal}</small>
+            </article>
+
+            <article className="album-progression-card album-progression-card-legendaria">
+              <span>Legendarias</span>
+              <strong>
+                {progression.legendaryObtainedCount}/{progression.totalLegendarias}
+              </strong>
+              <small>Presencias mayores de la coleccion</small>
+            </article>
+
+            <article className="album-progression-card">
+              <span>Proximo objetivo</span>
+              <strong>{progression.nextIncompletePage}</strong>
+              <small>
+                {progression.nextIncompletePageCompleted}/{progression.nextIncompletePageTotal}
+                {" "}
+                espacios recuperados
+              </small>
+            </article>
+          </div>
+        </section>
 
         <div className="album-navigation album-physical-navigation">
           <button
@@ -166,6 +236,12 @@ export default function AlbumCollectionView() {
               : "album-page-idle"
           }
         >
+          {pageTransition && (
+            <span
+              className="album-live-turn-sheet"
+              aria-hidden="true"
+            ></span>
+          )}
           <AlbumPage
             key={selectedPage}
             pagina={selectedPage}
@@ -177,4 +253,7 @@ export default function AlbumCollectionView() {
     </section>
   );
 }
+
+
+
 

@@ -10,7 +10,7 @@ export const masterCards: Card[] = [
     imagen: "/cards/placeholder.svg",
     pagina: "1810",
     pista:
-      "PresidiÃ³ la Primera Junta tras los sucesos de mayo."
+      "PresidiÃƒÂ³ la Primera Junta tras los sucesos de mayo."
   },
   {
     id: "moreno-1810-02",
@@ -21,7 +21,7 @@ export const masterCards: Card[] = [
     imagen: "/cards/placeholder.svg",
     pagina: "1810",
     pista:
-      "ImpulsÃ³ ideas revolucionarias desde la SecretarÃ­a de la Junta."
+      "ImpulsÃƒÂ³ ideas revolucionarias desde la SecretarÃƒÂ­a de la Junta."
   },
   {
     id: "belgrano-1810-03",
@@ -32,22 +32,22 @@ export const masterCards: Card[] = [
     imagen: "/cards/historicas/belgrano.png",
     pagina: "1810",
     pista:
-      "ParticipÃ³ en la RevoluciÃ³n y luego condujo campaÃ±as decisivas."
+      "ParticipÃƒÂ³ en la RevoluciÃƒÂ³n y luego condujo campaÃƒÂ±as decisivas."
   },
   {
     id: "sanmartin-1810-04",
-    nombre: "JosÃ© de San MartÃ­n",
+    nombre: "JosÃƒÂ© de San MartÃƒÂ­n",
     rareza: "Legendaria",
     codigo: "AR-1810-05-04",
     valor: 10,
     imagen: "/cards/historicas/sanmartin.png",
     pagina: "1810",
     pista:
-      "Su regreso al RÃ­o de la Plata abrirÃ­a una nueva etapa militar."
+      "Su regreso al RÃƒÂ­o de la Plata abrirÃƒÂ­a una nueva etapa militar."
   },
   {
     id: "castelli-1810-05",
-    nombre: "Juan JosÃ© Castelli",
+    nombre: "Juan JosÃƒÂ© Castelli",
     rareza: "Especial",
     codigo: "AR-1810-02-05",
     valor: 2,
@@ -58,14 +58,14 @@ export const masterCards: Card[] = [
   },
   {
     id: "azcuenaga-1810-06",
-    nombre: "Miguel de AzcuÃ©naga",
+    nombre: "Miguel de AzcuÃƒÂ©naga",
     rareza: "Simple",
     codigo: "AR-1810-01-06",
     valor: 1,
     imagen: "/cards/placeholder.svg",
     pagina: "1810",
     pista:
-      "IntegrÃ³ la Primera Junta como representante militar."
+      "IntegrÃƒÂ³ la Primera Junta como representante militar."
   },
   {
     id: "alberti-1810-07",
@@ -98,18 +98,18 @@ export const masterCards: Card[] = [
     imagen: "/cards/placeholder.svg",
     pagina: "1810",
     pista:
-      "FormÃ³ parte del grupo de comerciantes vinculados a la Junta."
+      "FormÃƒÂ³ parte del grupo de comerciantes vinculados a la Junta."
   },
   {
     id: "paso-1810-10",
-    nombre: "Juan JosÃ© Paso",
+    nombre: "Juan JosÃƒÂ© Paso",
     rareza: "Especial",
     codigo: "AR-1810-02-10",
     valor: 2,
     imagen: "/cards/placeholder.svg",
     pagina: "1810",
     pista:
-      "Su intervenciÃ³n jurÃ­dica fue clave en los debates de mayo."
+      "Su intervenciÃƒÂ³n jurÃƒÂ­dica fue clave en los debates de mayo."
   },
   {
     id: "french-1810-11",
@@ -120,7 +120,7 @@ export const masterCards: Card[] = [
     imagen: "/cards/placeholder.svg",
     pagina: "1810",
     pista:
-      "MovilizÃ³ apoyo popular durante las jornadas revolucionarias."
+      "MovilizÃƒÂ³ apoyo popular durante las jornadas revolucionarias."
   },
   {
     id: "beruti-1810-12",
@@ -131,7 +131,7 @@ export const masterCards: Card[] = [
     imagen: "/cards/placeholder.svg",
     pagina: "1810",
     pista:
-      "AcompaÃ±Ã³ la organizaciÃ³n popular en la Plaza de la Victoria."
+      "AcompaÃƒÂ±ÃƒÂ³ la organizaciÃƒÂ³n popular en la Plaza de la Victoria."
   },
   {
     id: "cabildo-1810-13",
@@ -157,7 +157,7 @@ export const masterCards: Card[] = [
     imagen: "/cards/placeholder.svg",
     pagina: "1810",
     pista:
-      "La otra mitad del hito: presiÃ³n popular frente al Cabildo.",
+      "La otra mitad del hito: presiÃƒÂ³n popular frente al Cabildo.",
     esCombinable: true,
     hitoId: "revolucion-mayo",
     parte: 2,
@@ -172,11 +172,11 @@ export const masterCards: Card[] = [
     imagen: "/cards/placeholder.svg",
     pagina: "1810",
     pista:
-      "SÃ­mbolo visual de pertenencia en el imaginario patrio."
+      "SÃƒÂ­mbolo visual de pertenencia en el imaginario patrio."
   },
   {
     id: "hito-revolucion-1810",
-    nombre: "RevoluciÃ³n de Mayo",
+    nombre: "RevoluciÃƒÂ³n de Mayo",
     rareza: "Hito",
     codigo: "AR-1810-HITO-01",
     valor: 0,
@@ -196,7 +196,7 @@ export const masterCards: Card[] = [
     imagen: "/cards/placeholder.svg",
     pagina: "1820",
     pista:
-      "Figura central de las tensiones polÃ­ticas de la dÃ©cada."
+      "Figura central de las tensiones polÃƒÂ­ticas de la dÃƒÂ©cada."
   },
   {
     id: "rosas-1830-01",
@@ -218,17 +218,189 @@ export const masterCards: Card[] = [
     imagen: "/cards/placeholder.svg",
     pagina: "1860",
     pista:
-      "Pensador, polÃ­tico y futuro presidente de la NaciÃ³n."
+      "Pensador, polÃƒÂ­tico y futuro presidente de la NaciÃƒÂ³n."
   },
   {
     id: "mitre-1860-02",
-    nombre: "BartolomÃ© Mitre",
+    nombre: "BartolomÃƒÂ© Mitre",
     rareza: "Especial",
     codigo: "AR-1860-02-02",
     valor: 2,
     imagen: "/cards/placeholder.svg",
     pagina: "1860",
     pista:
-      "Presidente e historiador en la etapa de organizaciÃ³n nacional."
+      "Presidente e historiador en la etapa de organizaciÃƒÂ³n nacional."
+  },
+  {
+    id: "defensa-bsas-1800-13",
+    nombre: "Defensa de Buenos Aires",
+    rareza: "Combinable",
+    codigo: "AR-1800-03-13",
+    valor: 2,
+    imagen: "/cards/placeholder.svg",
+    pagina: "1800",
+    pista:
+      "Primera pieza del hito: vecinos y milicias preparando la defensa de la ciudad.",
+    esCombinable: true,
+    hitoId: "invasiones-inglesas",
+    parte: 1,
+    partesTotales: 2
+  },
+  {
+    id: "reconquista-1800-14",
+    nombre: "Reconquista Popular",
+    rareza: "Combinable",
+    codigo: "AR-1800-03-14",
+    valor: 2,
+    imagen: "/cards/placeholder.svg",
+    pagina: "1800",
+    pista:
+      "Segunda pieza del hito: la ciudad recupera confianza en su propia fuerza colectiva.",
+    esCombinable: true,
+    hitoId: "invasiones-inglesas",
+    parte: 2,
+    partesTotales: 2
+  },
+  {
+    id: "hito-invasiones-1800",
+    nombre: "Invasiones Inglesas",
+    rareza: "Hito",
+    codigo: "AR-1800-HITO-01",
+    valor: 0,
+    imagen: "/cards/placeholder.svg",
+    pagina: "1800",
+    pista:
+      "Escena unificada de defensa urbana, milicias y memoria previa a Mayo.",
+    hitoId: "invasiones-inglesas",
+    partesTotales: 2
+  },
+  {
+    id: "acuerdo-provincias-1830-13",
+    nombre: "Acuerdo de Provincias",
+    rareza: "Combinable",
+    codigo: "AR-1830-03-13",
+    valor: 2,
+    imagen: "/cards/placeholder.svg",
+    pagina: "1830",
+    pista:
+      "Primera pieza del hito: provincias que negocian orden, defensa y poder.",
+    esCombinable: true,
+    hitoId: "pacto-federal",
+    parte: 1,
+    partesTotales: 2
+  },
+  {
+    id: "sellos-federales-1830-14",
+    nombre: "Sellos Federales",
+    rareza: "Combinable",
+    codigo: "AR-1830-03-14",
+    valor: 2,
+    imagen: "/cards/placeholder.svg",
+    pagina: "1830",
+    pista:
+      "Segunda pieza del hito: la firma politica como promesa y tension.",
+    esCombinable: true,
+    hitoId: "pacto-federal",
+    parte: 2,
+    partesTotales: 2
+  },
+  {
+    id: "hito-pacto-federal-1830",
+    nombre: "Pacto Federal",
+    rareza: "Hito",
+    codigo: "AR-1830-HITO-01",
+    valor: 0,
+    imagen: "/cards/placeholder.svg",
+    pagina: "1830",
+    pista:
+      "Escena unificada de pactos, sellos provinciales y organizacion federal.",
+    hitoId: "pacto-federal",
+    partesTotales: 2
+  },
+  {
+    id: "pergamino-1850-13",
+    nombre: "Pergamino Constitucional",
+    rareza: "Combinable",
+    codigo: "AR-1850-03-13",
+    valor: 2,
+    imagen: "/cards/placeholder.svg",
+    pagina: "1850",
+    pista:
+      "Primera pieza del hito: una pagina escrita como base de organizacion.",
+    esCombinable: true,
+    hitoId: "constitucion-1853",
+    parte: 1,
+    partesTotales: 2
+  },
+  {
+    id: "firma-1850-14",
+    nombre: "Firma de los Convencionales",
+    rareza: "Combinable",
+    codigo: "AR-1850-03-14",
+    valor: 2,
+    imagen: "/cards/placeholder.svg",
+    pagina: "1850",
+    pista:
+      "Segunda pieza del hito: acuerdos politicos que buscan perdurar.",
+    esCombinable: true,
+    hitoId: "constitucion-1853",
+    parte: 2,
+    partesTotales: 2
+  },
+  {
+    id: "hito-constitucion-1850",
+    nombre: "Constitucion de 1853",
+    rareza: "Hito",
+    codigo: "AR-1850-HITO-01",
+    valor: 0,
+    imagen: "/cards/placeholder.svg",
+    pagina: "1850",
+    pista:
+      "Escena unificada del texto constitucional, pluma y proyecto nacional.",
+    hitoId: "constitucion-1853",
+    partesTotales: 2
+  },
+  {
+    id: "presidencias-1860-13",
+    nombre: "Presidencias Fundacionales",
+    rareza: "Combinable",
+    codigo: "AR-1860-03-13",
+    valor: 2,
+    imagen: "/cards/placeholder.svg",
+    pagina: "1860",
+    pista:
+      "Primera pieza del hito: instituciones que intentan ordenar el territorio.",
+    esCombinable: true,
+    hitoId: "organizacion-nacional",
+    parte: 1,
+    partesTotales: 2
+  },
+  {
+    id: "mapa-unificado-1860-14",
+    nombre: "Mapa en Construccion",
+    rareza: "Combinable",
+    codigo: "AR-1860-03-14",
+    valor: 2,
+    imagen: "/cards/placeholder.svg",
+    pagina: "1860",
+    pista:
+      "Segunda pieza del hito: territorio, caminos y Estado en expansion.",
+    esCombinable: true,
+    hitoId: "organizacion-nacional",
+    parte: 2,
+    partesTotales: 2
+  },
+  {
+    id: "hito-organizacion-1860",
+    nombre: "Organizacion Nacional",
+    rareza: "Hito",
+    codigo: "AR-1860-HITO-01",
+    valor: 0,
+    imagen: "/cards/placeholder.svg",
+    pagina: "1860",
+    pista:
+      "Escena unificada de Estado, mapa, presidencias y simbolos institucionales.",
+    hitoId: "organizacion-nacional",
+    partesTotales: 2
   }
 ];

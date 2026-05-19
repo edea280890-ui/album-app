@@ -25,6 +25,12 @@ export default function AlbumOpeningCinematic({
     >
       <div className="album-cinematic-vignette"></div>
       <div className="album-cinematic-light"></div>
+      <div className="album-cinematic-relics" aria-hidden="true">
+        <span className="album-cinematic-relic album-cinematic-relic-map"></span>
+        <span className="album-cinematic-relic album-cinematic-relic-ribbon"></span>
+        <span className="album-cinematic-relic album-cinematic-relic-seal"></span>
+      </div>
+
       <div className="album-cinematic-dust">
         <span></span>
         <span></span>
@@ -97,6 +103,7 @@ export default function AlbumOpeningCinematic({
             <div className="cinematic-cover-sheen"></div>
           </div>
 
+          <div className="cinematic-page-ridge"></div>
           <div className="cinematic-turning-page"></div>
         </div>
       </div>
@@ -116,4 +123,5 @@ export default function AlbumOpeningCinematic({
     </section>
   );
 }
+
 

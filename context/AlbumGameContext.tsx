@@ -10,6 +10,7 @@ import {
 
 import { ALBUM_PAGES, TOTAL_ALBUM_CARDS } from "@/data/albumConfig";
 import { masterCards } from "@/data/cards";
+import { historicalHitos } from "@/data/hitos";
 import { openPack } from "@/lib/openPack";
 import type { Card } from "@/types/Card";
 
@@ -25,6 +26,34 @@ export type PageTurnDirection =
   | "previous"
   | "next"
   | "direct";
+
+export type HitoProgressSnapshot = {
+  id: string;
+  titulo: string;
+  pagina: string;
+  escena: string;
+  resumen: string;
+  completedParts: number;
+  totalParts: number;
+  unlocked: boolean;
+  missingParts: string[];
+  partNames: string[];
+};
+export type ProgressionSnapshot = {
+  completedPages: string[];
+  completedPagesCount: number;
+  totalPages: number;
+  obtainedUniqueCount: number;
+  totalCollectibleCards: number;
+  unlockedHitosCount: number;
+  totalHitos: number;
+  legendaryObtainedCount: number;
+  totalLegendarias: number;
+  nextIncompletePage: string;
+  nextIncompletePageCompleted: number;
+  nextIncompletePageTotal: number;
+  completionLabel: string;
+};
 
 const loadStoredCards = (key: string): Card[] => {
   if (typeof window === "undefined") {
@@ -55,6 +84,7 @@ type AlbumGameContextValue = {
   currentPageCompleted: number;
   pastedCount: number;
   completionPercentage: string;
+  progression: ProgressionSnapshot;
   groupedCards: Record<string, InventoryCard>;
   setSelectedCard: (card: Card | null) => void;
   getCardStatus: (card: Card) => CardStatus;
@@ -180,6 +210,129 @@ export function AlbumGameProvider({
     100
   ).toFixed(1);
 
+  const progression = useMemo<ProgressionSnapshot>(() => {
+    const completedPages = ALBUM_PAGES.filter((page) => {
+      const pageCards = getPageCards(page);
+
+      return (
+        pageCards.length > 0 &&
+        getPageCompletedCount(page) === pageCards.length
+      );
+    });
+
+    const nextIncompletePage =
+      ALBUM_PAGES.find((page) => {
+        const pageCards = getPageCards(page);
+
+        return (
+          pageCards.length > 0 &&
+          getPageCompletedCount(page) < pageCards.length
+        );
+      }) ?? ALBUM_PAGES[0];
+
+    const nextIncompletePageCards =
+      getPageCards(nextIncompletePage);
+    const obtainedCodes = new Set(
+      [...cards, ...album].map((card) => card.codigo)
+    );
+    const hitoCards = masterCards.filter(
+      (card) => card.rareza === "Hito"
+    );
+    const hitoProgress = historicalHitos.map((hito) => {
+      const hitoParts = masterCards
+        .filter(
+          (card) =>
+            card.esCombinable &&
+            card.hitoId === hito.id
+        )
+        .sort(
+          (firstCard, secondCard) =>
+            (firstCard.parte ?? 0) -
+            (secondCard.parte ?? 0)
+        );
+      const unlocked = album.some(
+        (albumCard) =>
+          albumCard.rareza === "Hito" &&
+          albumCard.hitoId === hito.id
+      );
+      const pastedParts = new Set(
+        album
+          .filter(
+            (albumCard) =>
+              albumCard.esCombinable &&
+              albumCard.hitoId === hito.id
+          )
+          .map((albumCard) => albumCard.parte ?? 0)
+      );
+      const totalParts =
+        hitoParts.length || hito.partesEsperadas;
+      const completedParts = unlocked
+        ? totalParts
+        : pastedParts.size;
+
+      return {
+        id: hito.id,
+        titulo: hito.titulo,
+        pagina: hito.pagina,
+        escena: hito.escena,
+        resumen: hito.resumen,
+        completedParts,
+        totalParts,
+        unlocked,
+        missingParts: unlocked
+          ? []
+          : hitoParts
+            .filter(
+              (partCard) =>
+                !pastedParts.has(partCard.parte ?? 0)
+            )
+            .map((partCard) => partCard.nombre),
+        partNames: hitoParts.map((partCard) => partCard.nombre)
+      };
+    });
+    const nextHito =
+      hitoProgress.find((hito) => !hito.unlocked) ??
+      hitoProgress[0];
+    const legendaryCards = masterCards.filter(
+      (card) => card.rareza === "Legendaria"
+    );
+    const totalCollectibleCards =
+      masterCards.filter(
+        (card) => card.rareza !== "Hito"
+      ).length + hitoCards.length;
+    const legendaryObtainedCount =
+      legendaryCards.filter((card) =>
+        obtainedCodes.has(card.codigo)
+      ).length;
+    const unlockedHitosCount =
+      hitoProgress.filter((hito) => hito.unlocked).length;
+    const completedPagesCount = completedPages.length;
+
+    const completionLabel =
+      completedPagesCount === ALBUM_PAGES.length
+        ? "Album completo"
+        : completedPagesCount > 0
+          ? "Decadas recuperadas"
+          : "Memoria en construccion";
+
+    return {
+      completedPages,
+      completedPagesCount,
+      totalPages: ALBUM_PAGES.length,
+      obtainedUniqueCount: obtainedCodes.size,
+      totalCollectibleCards,
+      unlockedHitosCount,
+      totalHitos: hitoCards.length,
+      legendaryObtainedCount,
+      totalLegendarias: legendaryCards.length,
+      nextIncompletePage,
+      nextIncompletePageCompleted:
+        getPageCompletedCount(nextIncompletePage),
+      nextIncompletePageTotal: nextIncompletePageCards.length,
+      completionLabel
+    };
+  }, [album, cards, getPageCards, getPageCompletedCount]);
+
   const getCardStatus = useCallback(
     (card: Card): CardStatus => {
       const isPasted = album.some(
@@ -226,8 +379,8 @@ export function AlbumGameProvider({
 
         setTimeout(() => {
           setPageTransition(false);
-        }, 160);
-      }, 360);
+        }, 420);
+      }, 460);
     },
     [selectedPage]
   );
@@ -356,6 +509,7 @@ export function AlbumGameProvider({
         currentPageCompleted,
         pastedCount,
         completionPercentage,
+        progression,
         groupedCards,
         setSelectedCard,
         getCardStatus,
@@ -376,6 +530,7 @@ export function AlbumGameProvider({
       getPageCards,
       getPageCompletedCount,
       groupedCards,
+      progression,
       handleOpenPack,
       openingPack,
       packCards,
@@ -410,3 +565,5 @@ export function useAlbumGame() {
 
   return ctx;
 }
+
+

@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 
@@ -29,6 +29,16 @@ export default function SobresCollectionView() {
   } = useAlbumGame();
 
   const hasResults = packCards.length > 0 && !showPack;
+  const rewardCard = packCards.find(
+    (card) =>
+      card.rareza === "Legendaria" || card.rareza === "Hito"
+  ) ?? packCards.find((card) => card.rareza === "Dorada");
+  const rewardRarityClass = rewardCard
+    ? rewardCard.rareza
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+    : null;
 
   return (
     <section className="sobres-table-section section-transition">
@@ -136,6 +146,16 @@ export default function SobresCollectionView() {
           <section className="pack-result pack-result-cinematic sobres-result-table">
             <div className="pack-result-light" aria-hidden="true"></div>
 
+            {rewardCard && (
+              <div
+                className={`pack-reward-banner pack-reward-banner-${rewardRarityClass}`}
+              >
+                <span>Recompensa del sobre</span>
+                <strong>{rewardCard.rareza}</strong>
+                <small>{rewardCard.nombre}</small>
+              </div>
+            )}
+
             <div className="pack-result-header sobres-result-header">
               <span>Sobre abierto</span>
 
@@ -208,5 +228,6 @@ export default function SobresCollectionView() {
     </section>
   );
 }
+
 
 

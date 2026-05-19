@@ -1,4 +1,4 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 
 :root {
   --background: #ffffff;
@@ -797,7 +797,7 @@ body {
 
 .album-page-complete::before {
 
-  content: "âœ” COMPLETADA";
+  content: "Ã¢Å“â€ COMPLETADA";
 
   position: absolute;
 
@@ -1076,7 +1076,7 @@ body::before {
   text-shadow: 0 2px 8px black;
 }
 
-/* PilÃ³n de figuritas */
+/* PilÃƒÂ³n de figuritas */
 .sticker-card {
   position: absolute;
   width: 110px;
@@ -1103,7 +1103,7 @@ body::before {
   background: linear-gradient(135deg, #5a1d1d, #180909);
 }
 
-/* Ãlbum cerrado */
+/* ÃƒÂlbum cerrado */
 .album-cover-object {
   position: absolute;
   width: 170px;
@@ -9401,7 +9401,7 @@ body::before {
   transform: rotate(-9deg);
 }
 
-/* Home interactiva: objetos fÃ­sicos sobre referencia */
+/* Home interactiva: objetos fÃƒÂ­sicos sobre referencia */
 .reference-interactive-hub .reference-tabletop-base {
   z-index: 0;
   pointer-events: none;
@@ -16247,3 +16247,1380 @@ body::before {
   }
 }
 
+
+/* Deep emotional /album interaction pass */
+.album-table-props {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.album-table-prop {
+  position: absolute;
+  display: block;
+  opacity: 0.22;
+  filter: blur(0.1px) saturate(0.8);
+}
+
+.album-table-prop-map {
+  left: -86px;
+  top: 118px;
+  width: 310px;
+  height: 210px;
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(222, 192, 132, 0.28), rgba(104, 66, 28, 0.18)),
+    repeating-linear-gradient(18deg, rgba(70, 42, 18, 0.14) 0 1px, transparent 1px 22px);
+  box-shadow: 0 28px 46px rgba(0,0,0,0.4);
+  transform: rotate(-11deg);
+}
+
+.album-table-prop-thread {
+  right: 7vw;
+  top: 172px;
+  width: 190px;
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, transparent, rgba(219, 174, 92, 0.52), transparent);
+  box-shadow: 0 0 18px rgba(236, 196, 111, 0.22);
+  transform: rotate(16deg);
+}
+
+.album-table-prop-wax {
+  right: 11vw;
+  bottom: 112px;
+  width: 54px;
+  height: 44px;
+  border-radius: 45% 55% 48% 52%;
+  background:
+    radial-gradient(circle at 38% 28%, rgba(255, 192, 124, 0.34), transparent 34%),
+    linear-gradient(135deg, rgba(126, 29, 20, 0.76), rgba(66, 14, 10, 0.72));
+  box-shadow: 0 18px 28px rgba(0,0,0,0.38);
+  transform: rotate(-8deg);
+}
+
+.album-table-section .album-spread-status {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.55fr) minmax(180px, 0.7fr) minmax(190px, 0.5fr);
+  align-items: center;
+  gap: 14px;
+}
+
+.album-total-progress {
+  justify-self: end;
+  min-width: 176px;
+  padding: 11px 14px;
+  border: 1px solid rgba(255, 221, 145, 0.18);
+  border-radius: 14px;
+  background:
+    linear-gradient(180deg, rgba(255, 221, 145, 0.08), rgba(0,0,0,0.16));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.07);
+}
+
+.album-total-progress span {
+  display: block;
+  margin-bottom: 4px;
+  color: rgba(255, 226, 164, 0.68);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.album-total-progress strong {
+  color: #fff0bd;
+  font-size: 13px;
+}
+
+.album-page-gutter-shadow {
+  position: absolute;
+  left: 50%;
+  top: 18px;
+  bottom: 18px;
+  z-index: 4;
+  width: 54px;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(61, 34, 12, 0.24), transparent 66%);
+  filter: blur(1.5px);
+  transform: translateX(-50%);
+}
+
+.album-live-turn-sheet {
+  position: absolute;
+  left: 50%;
+  top: 70px;
+  z-index: 42;
+  width: min(530px, 46vw);
+  height: calc(100% - 110px);
+  border-radius: 24px 32px 32px 24px;
+  pointer-events: none;
+  background:
+    linear-gradient(92deg, rgba(94, 55, 18, 0.2), rgba(255, 247, 219, 0.78) 44%, rgba(188, 138, 70, 0.22) 74%, transparent),
+    repeating-linear-gradient(180deg, rgba(255, 239, 205, 0.5) 0 2px, rgba(183, 137, 78, 0.18) 2px 4px);
+  box-shadow:
+    0 28px 48px rgba(0,0,0,0.26),
+    inset 0 1px 0 rgba(255,255,255,0.5);
+  opacity: 0;
+  transform-origin: left center;
+  animation: albumLiveSheetTurn 0.88s cubic-bezier(0.18, 0.72, 0.18, 1) both;
+}
+
+.album-page-turning-previous .album-live-turn-sheet {
+  transform-origin: right center;
+  animation-name: albumLiveSheetTurnPrevious;
+}
+
+.album-slot-laminate {
+  position: absolute;
+  inset: 8px;
+  z-index: 6;
+  border-radius: 9px;
+  pointer-events: none;
+  opacity: 0.36;
+  background:
+    linear-gradient(118deg, rgba(255,255,255,0.28), transparent 28%, transparent 68%, rgba(255,255,255,0.12)),
+    radial-gradient(ellipse at 24% 10%, rgba(255,255,255,0.18), transparent 38%);
+  mix-blend-mode: screen;
+}
+
+.album-slot-rarity-stamp,
+.album-slot-hito-seal {
+  position: absolute;
+  z-index: 8;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 6px;
+  pointer-events: none;
+  text-transform: uppercase;
+  box-shadow:
+    0 7px 12px rgba(0,0,0,0.22),
+    inset 0 1px 0 rgba(255,255,255,0.22);
+}
+
+.album-slot-rarity-stamp {
+  left: 12px;
+  top: 12px;
+  min-width: 54px;
+  min-height: 20px;
+  padding: 3px 7px;
+  border: 1px solid rgba(255, 230, 164, 0.34);
+  background: rgba(29, 16, 8, 0.62);
+  color: #ffe8a9;
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.album-slot-hito-seal {
+  right: -9px;
+  top: 42%;
+  min-width: 46px;
+  min-height: 28px;
+  border: 1px solid rgba(111, 231, 178, 0.5);
+  background:
+    radial-gradient(circle at 32% 18%, rgba(255,255,255,0.24), transparent 36%),
+    linear-gradient(135deg, rgba(34, 120, 85, 0.94), rgba(19, 55, 43, 0.94));
+  color: #dbffe8;
+  font-size: 9px;
+  font-weight: 900;
+  transform: rotate(7deg);
+}
+
+.album-slot-empty-adhesive {
+  position: absolute;
+  z-index: 5;
+  width: 34px;
+  height: 12px;
+  border-radius: 4px;
+  opacity: 0.32;
+  pointer-events: none;
+  background:
+    linear-gradient(180deg, rgba(255, 243, 210, 0.62), rgba(166, 126, 72, 0.28));
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.28);
+}
+
+.album-slot-empty-adhesive-a {
+  left: 14px;
+  top: 12px;
+  transform: rotate(-9deg);
+}
+
+.album-slot-empty-adhesive-b {
+  right: 14px;
+  bottom: 12px;
+  transform: rotate(8deg);
+}
+
+.album-table-section .album-slot-empty:hover,
+.album-table-section .album-slot-empty:focus-visible {
+  filter: brightness(1.04);
+  transform:
+    rotate(calc(((var(--slot-index, 0) % 5) - 2) * 0.14deg))
+    translateY(-3px);
+  box-shadow:
+    inset 0 7px 14px rgba(75, 45, 17, 0.18),
+    0 12px 20px rgba(75, 45, 17, 0.12) !important;
+}
+
+.album-table-section .album-page-complete .album-page-progress-fill {
+  animation: albumCompletedProgressPulse 3.4s ease-in-out infinite;
+}
+
+.album-cinematic-relics {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.album-cinematic-relic {
+  position: absolute;
+  display: block;
+  opacity: 0.26;
+  filter: saturate(0.82) brightness(0.84);
+}
+
+.album-cinematic-relic-map {
+  left: 5vw;
+  bottom: 9vh;
+  width: 280px;
+  height: 180px;
+  border-radius: 18px;
+  background:
+    linear-gradient(135deg, rgba(228, 198, 139, 0.34), rgba(90, 56, 22, 0.2)),
+    repeating-linear-gradient(20deg, rgba(62, 40, 19, 0.18) 0 1px, transparent 1px 20px);
+  transform: rotate(-12deg);
+}
+
+.album-cinematic-relic-ribbon {
+  right: 8vw;
+  top: 18vh;
+  width: 210px;
+  height: 22px;
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg, rgba(91, 170, 210, 0.65), rgba(245,245,230,0.62), rgba(91, 170, 210, 0.65));
+  box-shadow: 0 10px 26px rgba(0,0,0,0.34);
+  transform: rotate(17deg);
+}
+
+.album-cinematic-relic-seal {
+  right: 18vw;
+  bottom: 16vh;
+  width: 58px;
+  height: 52px;
+  border-radius: 48% 52% 45% 55%;
+  background:
+    radial-gradient(circle at 34% 24%, rgba(255, 205, 145, 0.32), transparent 34%),
+    linear-gradient(135deg, rgba(123, 28, 20, 0.82), rgba(56, 12, 9, 0.9));
+  box-shadow: 0 16px 28px rgba(0,0,0,0.36);
+}
+
+.cinematic-page-ridge {
+  position: absolute;
+  left: 50%;
+  bottom: -16px;
+  z-index: 4;
+  width: 360px;
+  height: 38px;
+  border-radius: 0 0 24px 24px;
+  background:
+    repeating-linear-gradient(180deg, rgba(246, 230, 193, 0.94) 0 2px, rgba(179, 139, 82, 0.82) 2px 4px);
+  box-shadow: 0 18px 28px rgba(0,0,0,0.34);
+  transform: translateX(-50%) rotateX(58deg);
+}
+
+@keyframes albumLiveSheetTurn {
+  0% {
+    opacity: 0;
+    transform: translateX(-2%) rotateY(0deg) skewY(0deg);
+  }
+  18% {
+    opacity: 0.92;
+  }
+  54% {
+    opacity: 0.95;
+    transform: translateX(-24%) rotateY(-64deg) skewY(-1.4deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-52%) rotateY(-116deg) skewY(-2deg);
+  }
+}
+
+@keyframes albumLiveSheetTurnPrevious {
+  0% {
+    opacity: 0;
+    transform: translateX(-98%) rotateY(0deg) skewY(0deg);
+  }
+  18% {
+    opacity: 0.92;
+  }
+  54% {
+    opacity: 0.95;
+    transform: translateX(-72%) rotateY(64deg) skewY(1.4deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-48%) rotateY(116deg) skewY(2deg);
+  }
+}
+
+@keyframes albumCompletedProgressPulse {
+  0%,
+  100% {
+    filter: brightness(1);
+    box-shadow: 0 0 18px rgba(225, 174, 67, 0.28);
+  }
+  50% {
+    filter: brightness(1.16);
+    box-shadow: 0 0 28px rgba(255, 218, 107, 0.52);
+  }
+}
+
+@media (max-width: 900px) {
+  .album-table-section .album-spread-status {
+    grid-template-columns: 1fr;
+  }
+
+  .album-total-progress {
+    justify-self: stretch;
+  }
+
+  .album-live-turn-sheet {
+    display: none;
+  }
+}
+
+@media (max-width: 620px) {
+  .album-table-props,
+  .album-cinematic-relics {
+    display: none;
+  }
+
+  .album-slot-rarity-stamp {
+    max-width: 74px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+/* Premium tactile game feel pass */
+.album-table-section::after,
+.figuritas-table-section::after,
+.sobres-table-section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.18;
+  background:
+    radial-gradient(circle at 14% 28%, rgba(255, 230, 168, 0.34) 0 1px, transparent 2px),
+    radial-gradient(circle at 72% 18%, rgba(255, 218, 138, 0.28) 0 1px, transparent 2px),
+    radial-gradient(circle at 86% 66%, rgba(255, 238, 190, 0.22) 0 1px, transparent 2px),
+    radial-gradient(circle at 34% 78%, rgba(255, 218, 138, 0.24) 0 1px, transparent 2px);
+  background-size: 420px 320px, 520px 420px, 460px 360px, 560px 460px;
+  animation: premiumDustDrift 18s ease-in-out infinite;
+}
+
+.album-slot-just-pasted {
+  animation:
+    albumTactilePasteSnap 0.92s cubic-bezier(0.16, 0.78, 0.2, 1) both;
+}
+
+.album-slot-just-pasted .album-slot-contact {
+  animation: pastedContactSnap 0.92s ease both;
+}
+
+.album-slot-just-pasted .album-slot-laminate {
+  animation: pastedLaminateCatch 1.08s ease both;
+}
+
+.album-slot-just-pasted .album-slot-adhesive {
+  animation: pastedTapePress 0.86s ease both;
+}
+
+.album-slot-just-pasted .album-slot-rarity-stamp,
+.album-slot-just-pasted .album-slot-hito-seal {
+  animation: pastedStampSettle 0.78s ease both;
+}
+
+.album-slot-just-pasted .album-slot-settle-glow {
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(255, 230, 154, 0.44), rgba(255, 181, 72, 0.16) 44%, transparent 74%);
+  animation: warmSettleGlow 1.18s ease both;
+}
+
+.album-slot-just-pasted .album-slot-settle-dust {
+  animation: albumTactileDustSettle 1.04s ease both;
+}
+
+.album-table-section .album-slot-pasted:hover .album-slot-contact,
+.album-table-section .album-slot-pasted:focus-visible .album-slot-contact {
+  opacity: 0.78;
+  transform: translateY(8px) scale(1.12);
+}
+
+.album-table-section .album-slot-pasted:hover .album-slot-laminate,
+.album-table-section .album-slot-pasted:focus-visible .album-slot-laminate {
+  opacity: 0.58;
+  animation: tactileLaminateSweep 1.2s ease both;
+}
+
+.album-table-section .album-slot-empty:hover .album-slot-empty-adhesive,
+.album-table-section .album-slot-empty:focus-visible .album-slot-empty-adhesive {
+  opacity: 0.52;
+}
+
+.album-page-reward .album-physical-page,
+.album-table-section .album-page-complete {
+  animation: completedPageBreath 5.6s ease-in-out infinite;
+}
+
+.album-page-reward .album-decade-note {
+  border-color: rgba(199, 142, 45, 0.34);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.22),
+    0 12px 24px rgba(84, 50, 18, 0.12),
+    0 0 26px rgba(255, 207, 96, 0.1);
+}
+
+.album-page-reward .album-page-progress-track {
+  box-shadow:
+    inset 0 2px 4px rgba(70, 42, 16, 0.18),
+    0 5px 10px rgba(84, 48, 17, 0.12),
+    0 0 20px rgba(255, 210, 91, 0.16);
+}
+
+.inventory-card-settling {
+  animation:
+    inventoryTactileLiftAndSettle 0.62s cubic-bezier(0.16, 0.78, 0.2, 1) both;
+}
+
+.inventory-card-settling .inventory-card-contact-shadow {
+  animation: inventoryContactSettle 0.62s ease both;
+}
+
+.inventory-card-settling .inventory-card-elastic {
+  animation: inventoryElasticSnap 0.7s ease both;
+}
+
+.inventory-card-settling .inventory-card-touch-glow {
+  background:
+    radial-gradient(ellipse at 50% 38%, rgba(255, 230, 157, 0.3), rgba(255, 176, 75, 0.08) 42%, transparent 68%);
+}
+
+.inventory-physical-card:hover .inventory-card-image,
+.inventory-physical-card:focus-within .inventory-card-image,
+.album-slot-pasted:hover .album-slot-image,
+.album-slot-pasted:focus-visible .album-slot-image,
+.pack-card-reveal:hover .pack-card-image,
+.pack-card-reveal:focus-visible .pack-card-image {
+  filter: contrast(1.08) saturate(1.04) brightness(1.04);
+}
+
+.inventory-physical-card.card-frame-simple:hover,
+.album-slot-simple:hover,
+.pack-card-reveal-simple:hover {
+  filter: brightness(1.035) saturate(1.01);
+}
+
+.inventory-physical-card.card-frame-especial:hover,
+.album-slot-especial:hover,
+.pack-card-reveal-especial:hover {
+  box-shadow:
+    0 36px 42px rgba(0,0,0,0.54),
+    0 0 28px rgba(142, 205, 232, 0.18),
+    inset 0 1px 0 rgba(255,255,255,0.15);
+}
+
+.inventory-physical-card.card-frame-dorada,
+.album-slot-dorada,
+.pack-card-reveal-dorada,
+.card-viewer-dorada .card-viewer-object {
+  --rarity-glow: rgba(255, 210, 79, 0.28);
+}
+
+.inventory-physical-card.card-frame-dorada::after,
+.album-slot-dorada .album-slot-laminate,
+.pack-card-reveal-dorada::after,
+.card-viewer-dorada .card-viewer-object-sheen {
+  animation: premiumFoilSweep 3.8s ease-in-out infinite;
+}
+
+.inventory-physical-card.card-frame-legendaria,
+.album-slot-legendaria,
+.pack-card-reveal-legendaria,
+.card-viewer-legendaria .card-viewer-object {
+  --rarity-glow: rgba(255, 68, 64, 0.22);
+}
+
+.inventory-physical-card.card-frame-legendaria,
+.album-slot-legendaria,
+.pack-card-reveal-legendaria {
+  animation: legendaryPresenceBreath 5.8s ease-in-out infinite;
+}
+
+.inventory-physical-card.card-frame-combinable,
+.inventory-physical-card.card-frame-hito,
+.album-slot-combinable,
+.album-slot-hito,
+.pack-card-reveal-combinable,
+.pack-card-reveal-hito,
+.card-viewer-combinable .card-viewer-object,
+.card-viewer-hito .card-viewer-object {
+  --rarity-glow: rgba(83, 215, 160, 0.2);
+}
+
+.inventory-physical-card.card-frame-combinable,
+.inventory-physical-card.card-frame-hito,
+.album-slot-combinable,
+.album-slot-hito,
+.pack-card-reveal-combinable,
+.pack-card-reveal-hito {
+  animation: hitoMysteryPulse 6.4s ease-in-out infinite;
+}
+
+.pack-card-reveal {
+  transition:
+    transform 0.36s cubic-bezier(0.2, 0.72, 0.18, 1),
+    filter 0.36s ease,
+    box-shadow 0.36s ease;
+}
+
+.pack-card-reveal-simple {
+  animation-duration: 0.86s;
+}
+
+.pack-card-reveal-especial {
+  animation-duration: 1.04s;
+}
+
+.pack-card-reveal-dorada {
+  animation-duration: 1.28s;
+}
+
+.pack-card-reveal-legendaria,
+.pack-card-reveal-hito {
+  animation-duration: 1.56s;
+}
+
+.pack-card-reveal-legendaria .pack-card-stage-glow,
+.pack-card-reveal-hito .pack-card-stage-glow {
+  filter: blur(2px);
+}
+
+.pack-card-reveal:hover .pack-card-table-shadow,
+.pack-card-reveal:focus-visible .pack-card-table-shadow {
+  opacity: 0.68;
+  transform: translateY(14px) scale(1.16) rotateX(70deg);
+}
+
+.real-pack-opening .pack-tactile-aura {
+  animation: packPremiumHandFeel 3.15s ease both;
+}
+
+.real-pack-opening .pack-light {
+  filter: blur(0.2px);
+}
+
+.real-pack-opening .pack-reward-sparks span {
+  border-radius: 50%;
+  transform: scale(0.72);
+}
+
+.card-viewer-object {
+  transform-origin: center bottom;
+}
+
+.card-viewer-object:hover {
+  filter: brightness(1.05) saturate(1.04);
+}
+
+.card-viewer-simple .card-viewer-object-glow {
+  opacity: 0.36;
+  background: radial-gradient(ellipse at 50% 32%, rgba(177, 213, 228, 0.18), transparent 68%);
+}
+
+.card-viewer-especial .card-viewer-object-glow {
+  opacity: 0.52;
+  background:
+    radial-gradient(ellipse at 50% 32%, rgba(177, 225, 244, 0.28), transparent 68%);
+}
+
+.card-viewer-dorada .card-viewer-object-glow {
+  opacity: 0.7;
+  background:
+    radial-gradient(ellipse at 50% 32%, rgba(255, 218, 93, 0.32), transparent 68%);
+}
+
+.card-viewer-legendaria .card-viewer-object-glow {
+  opacity: 0.78;
+  background:
+    radial-gradient(ellipse at 48% 28%, rgba(255, 211, 98, 0.3), transparent 58%),
+    radial-gradient(ellipse at 54% 44%, rgba(175, 36, 32, 0.26), transparent 72%);
+}
+
+.card-viewer-combinable .card-viewer-object-glow,
+.card-viewer-hito .card-viewer-object-glow {
+  opacity: 0.68;
+  background:
+    radial-gradient(ellipse at 44% 28%, rgba(91, 231, 171, 0.25), transparent 58%),
+    radial-gradient(ellipse at 58% 50%, rgba(255, 213, 106, 0.16), transparent 72%);
+}
+
+@keyframes premiumDustDrift {
+  0%,
+  100% {
+    opacity: 0.12;
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    opacity: 0.22;
+    transform: translate3d(14px, -18px, 0);
+  }
+}
+
+@keyframes albumTactilePasteSnap {
+  0% {
+    transform:
+      rotate(calc(((var(--slot-index, 0) % 5) - 2) * 0.4deg))
+      translateY(-24px)
+      translateZ(58px)
+      scale(1.052);
+    filter: brightness(1.18) saturate(1.12);
+  }
+  38% {
+    transform:
+      rotate(calc(((var(--slot-index, 0) % 5) - 2) * 0.18deg))
+      translateY(5px)
+      translateZ(4px)
+      scale(0.992);
+    filter: brightness(1.08) saturate(1.06);
+  }
+  58% {
+    transform:
+      rotate(calc(((var(--slot-index, 0) % 5) - 2) * 0.34deg))
+      translateY(-2px)
+      translateZ(13px)
+      scale(1.004);
+  }
+  100% {
+    transform:
+      rotate(calc(((var(--slot-index, 0) % 5) - 2) * 0.5deg))
+      translateZ(8px);
+    filter: none;
+  }
+}
+
+@keyframes pastedContactSnap {
+  0% {
+    opacity: 0.18;
+    transform: translateY(18px) scale(0.72);
+  }
+  42% {
+    opacity: 0.72;
+    transform: translateY(3px) scale(1.08);
+  }
+  100% {
+    opacity: 0.46;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pastedLaminateCatch {
+  0% {
+    opacity: 0;
+    transform: translateX(-28%) skewX(-9deg);
+  }
+  34% {
+    opacity: 0.78;
+  }
+  100% {
+    opacity: 0.34;
+    transform: translateX(14%) skewX(-9deg);
+  }
+}
+
+@keyframes pastedTapePress {
+  0% {
+    opacity: 0.2;
+    transform: translateY(-4px) rotate(-8deg) scale(1.08);
+  }
+  55% {
+    opacity: 0.82;
+    filter: brightness(1.12);
+  }
+  100% {
+    opacity: 0.72;
+  }
+}
+
+@keyframes pastedStampSettle {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px) rotate(-4deg) scale(1.08);
+  }
+  70% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes albumTactileDustSettle {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px) scale(0.65);
+  }
+  38% {
+    opacity: 0.8;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-26px) scale(1.42);
+  }
+}
+
+@keyframes tactileLaminateSweep {
+  0% {
+    background-position: -80px 0;
+  }
+  100% {
+    background-position: 120px 0;
+  }
+}
+
+@keyframes completedPageBreath {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.035) saturate(1.015);
+  }
+}
+
+@keyframes inventoryTactileLiftAndSettle {
+  0% {
+    transform:
+      rotate(calc(((var(--card-index, 0) % 5) - 2) * 1.2deg))
+      translateY(0)
+      scale(1);
+  }
+  36% {
+    transform:
+      rotate(calc(((var(--card-index, 0) % 5) - 2) * 0.35deg))
+      translateY(-12px)
+      translateZ(38px)
+      scale(1.024);
+  }
+  74% {
+    transform:
+      rotate(calc(((var(--card-index, 0) % 5) - 2) * 0.2deg))
+      translateY(5px)
+      scale(0.99);
+  }
+  100% {
+    transform:
+      rotate(calc(((var(--card-index, 0) % 5) - 2) * 0.55deg))
+      translateY(2px)
+      scale(0.996);
+  }
+}
+
+@keyframes inventoryContactSettle {
+  0% {
+    opacity: 0.24;
+    transform: translateY(18px) scale(0.8);
+  }
+  58% {
+    opacity: 0.78;
+    transform: translateY(4px) scale(1.12);
+  }
+  100% {
+    opacity: 0.5;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes inventoryElasticSnap {
+  0%,
+  100% {
+    transform: rotate(-7deg) scaleX(1);
+  }
+  42% {
+    transform: rotate(-6deg) scaleX(1.035);
+  }
+  68% {
+    transform: rotate(-8deg) scaleX(0.985);
+  }
+}
+
+@keyframes premiumFoilSweep {
+  0%,
+  100% {
+    opacity: 0.34;
+    transform: translateX(-18%) skewX(-10deg);
+  }
+  50% {
+    opacity: 0.72;
+    transform: translateX(18%) skewX(-10deg);
+  }
+}
+
+@keyframes legendaryPresenceBreath {
+  0%,
+  100% {
+    filter: brightness(1) saturate(1);
+  }
+  50% {
+    filter: brightness(1.075) saturate(1.08);
+  }
+}
+
+@keyframes hitoMysteryPulse {
+  0%,
+  100% {
+    filter: saturate(1) brightness(1);
+  }
+  50% {
+    filter: saturate(1.1) brightness(1.045);
+  }
+}
+
+@keyframes packPremiumHandFeel {
+  0% {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+  24% {
+    opacity: 0.74;
+  }
+  64% {
+    opacity: 0.3;
+    transform: scale(1.14);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.28);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .album-table-section::after,
+  .figuritas-table-section::after,
+  .sobres-table-section::after,
+  .album-slot-just-pasted,
+  .album-slot-just-pasted .album-slot-contact,
+  .album-slot-just-pasted .album-slot-laminate,
+  .album-slot-just-pasted .album-slot-adhesive,
+  .album-slot-just-pasted .album-slot-rarity-stamp,
+  .album-slot-just-pasted .album-slot-hito-seal,
+  .album-page-reward .album-physical-page,
+  .album-table-section .album-page-complete,
+  .inventory-card-settling,
+  .inventory-card-settling .inventory-card-contact-shadow,
+  .inventory-card-settling .inventory-card-elastic,
+  .inventory-physical-card.card-frame-dorada::after,
+  .album-slot-dorada .album-slot-laminate,
+  .pack-card-reveal-dorada::after,
+  .card-viewer-dorada .card-viewer-object-sheen,
+  .inventory-physical-card.card-frame-legendaria,
+  .album-slot-legendaria,
+  .pack-card-reveal-legendaria,
+  .inventory-physical-card.card-frame-combinable,
+  .inventory-physical-card.card-frame-hito,
+  .album-slot-combinable,
+  .album-slot-hito,
+  .pack-card-reveal-combinable,
+  .pack-card-reveal-hito {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+/* Progression and reward system polish */
+.album-progression-relic {
+  position: relative;
+  z-index: 5;
+  display: grid;
+  grid-template-columns: minmax(160px, 0.32fr) 1fr;
+  gap: 18px;
+  width: min(1080px, 100%);
+  margin: 0 auto 18px;
+  padding: 16px;
+  border: 1px solid rgba(255, 222, 145, 0.18);
+  border-radius: 22px;
+  background:
+    radial-gradient(ellipse at 18% 20%, rgba(255, 218, 125, 0.14), transparent 42%),
+    linear-gradient(180deg, rgba(30, 19, 10, 0.68), rgba(8, 6, 4, 0.54));
+  box-shadow:
+    0 24px 42px rgba(0,0,0,0.34),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.album-progression-relic::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border: 1px solid rgba(255, 224, 154, 0.08);
+  border-radius: 17px;
+  pointer-events: none;
+}
+
+.album-progression-medallion {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 150px;
+  padding: 20px;
+  border: 1px solid rgba(255, 224, 154, 0.28);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 34% 24%, rgba(255, 238, 178, 0.3), transparent 34%),
+    radial-gradient(circle at 50% 60%, rgba(180, 109, 30, 0.42), rgba(55, 31, 12, 0.76) 68%);
+  color: #fff0bd;
+  text-align: center;
+  box-shadow:
+    0 18px 28px rgba(0,0,0,0.36),
+    0 0 30px rgba(255, 204, 91, 0.1),
+    inset 0 1px 0 rgba(255,255,255,0.18);
+}
+
+.album-progression-medallion span {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(28px, 4vw, 46px);
+  font-weight: 800;
+  line-height: 1;
+}
+
+.album-progression-medallion strong {
+  max-width: 130px;
+  color: rgba(255, 240, 202, 0.82);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+.album-progression-cards {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.album-progression-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 118px;
+  padding: 14px;
+  border: 1px solid rgba(255, 224, 154, 0.16);
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, rgba(255, 230, 165, 0.08), rgba(0,0,0,0.18)),
+    rgba(12, 8, 5, 0.46);
+  box-shadow:
+    0 14px 24px rgba(0,0,0,0.24),
+    inset 0 1px 0 rgba(255,255,255,0.06);
+}
+
+.album-progression-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background:
+    linear-gradient(112deg, transparent 0 35%, rgba(255,255,255,0.16) 48%, transparent 62%);
+  transform: translateX(-80%);
+  transition: opacity 0.3s ease;
+}
+
+.album-progression-card:hover::after {
+  opacity: 1;
+  animation: progressionCardSheen 1.2s ease both;
+}
+
+.album-progression-card span {
+  display: block;
+  margin-bottom: 8px;
+  color: rgba(255, 225, 154, 0.7);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.album-progression-card strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #fff1bf;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+  line-height: 1;
+}
+
+.album-progression-card small {
+  color: rgba(255, 240, 205, 0.62);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.album-progression-card-hito {
+  border-color: rgba(93, 218, 164, 0.24);
+  background:
+    radial-gradient(ellipse at 30% 0%, rgba(83, 215, 160, 0.13), transparent 52%),
+    rgba(12, 8, 5, 0.46);
+}
+
+.album-progression-card-legendaria {
+  border-color: rgba(255, 206, 91, 0.26);
+  background:
+    radial-gradient(ellipse at 30% 0%, rgba(255, 194, 76, 0.14), transparent 52%),
+    radial-gradient(ellipse at 80% 100%, rgba(136, 31, 26, 0.12), transparent 54%),
+    rgba(12, 8, 5, 0.46);
+}
+
+.album-progression-card-discovery {
+  border-color: rgba(123, 185, 255, 0.22);
+  background:
+    radial-gradient(ellipse at 24% 0%, rgba(91, 160, 255, 0.12), transparent 54%),
+    linear-gradient(135deg, rgba(255, 230, 165, 0.06), rgba(0,0,0,0.18)),
+    rgba(12, 8, 5, 0.46);
+}
+
+.album-page-tab-complete {
+  position: relative;
+}
+
+.album-page-tab-complete::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 4px;
+  width: 34px;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(255, 215, 101, 0.82);
+  box-shadow: 0 0 14px rgba(255, 207, 91, 0.42);
+  transform: translateX(-50%);
+}
+
+.pack-reward-banner {
+  position: relative;
+  z-index: 4;
+  width: min(520px, 100%);
+  margin: 0 auto 20px;
+  padding: 14px 18px;
+  border: 1px solid rgba(255, 224, 154, 0.24);
+  border-radius: 16px;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(255, 213, 112, 0.18), transparent 58%),
+    linear-gradient(180deg, rgba(32, 19, 10, 0.78), rgba(8, 6, 4, 0.72));
+  color: #fff0c2;
+  text-align: center;
+  box-shadow:
+    0 20px 38px rgba(0,0,0,0.36),
+    0 0 34px rgba(255, 204, 91, 0.12),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+  animation: packRewardBannerArrive 0.76s cubic-bezier(0.18, 0.74, 0.2, 1) both;
+}
+
+.pack-reward-banner span,
+.pack-reward-banner small {
+  display: block;
+  color: rgba(255, 230, 170, 0.72);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.pack-reward-banner strong {
+  display: block;
+  margin: 6px 0;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(28px, 4vw, 44px);
+  line-height: 1;
+}
+
+.pack-reward-banner-legendaria {
+  border-color: rgba(255, 214, 105, 0.46);
+  box-shadow:
+    0 24px 46px rgba(0,0,0,0.42),
+    0 0 48px rgba(255, 204, 91, 0.2),
+    0 0 42px rgba(125, 22, 20, 0.14),
+    inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+.pack-reward-banner-hito {
+  border-color: rgba(98, 232, 174, 0.44);
+  box-shadow:
+    0 24px 46px rgba(0,0,0,0.42),
+    0 0 48px rgba(98, 232, 174, 0.16),
+    inset 0 1px 0 rgba(255,255,255,0.12);
+}
+
+@keyframes progressionCardSheen {
+  0% {
+    transform: translateX(-80%) skewX(-12deg);
+  }
+  100% {
+    transform: translateX(80%) skewX(-12deg);
+  }
+}
+
+@keyframes packRewardBannerArrive {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 920px) {
+  .album-progression-relic {
+    grid-template-columns: 1fr;
+  }
+
+  .album-progression-medallion {
+    justify-self: center;
+    width: 170px;
+    height: 170px;
+  }
+
+  .album-progression-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .album-progression-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Historical hito system polish */
+.album-hito-ledger {
+  position: relative;
+  z-index: 8;
+  margin: 18px auto 22px;
+  padding: 16px;
+  border: 1px solid rgba(100, 224, 171, 0.18);
+  border-radius: 18px;
+  background:
+    radial-gradient(ellipse at 18% 0%, rgba(89, 222, 165, 0.12), transparent 50%),
+    linear-gradient(180deg, rgba(37, 25, 13, 0.54), rgba(13, 9, 5, 0.34));
+  box-shadow:
+    0 18px 34px rgba(0,0,0,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.album-hito-ledger::before {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px solid rgba(255, 225, 160, 0.08);
+  border-radius: 14px;
+  pointer-events: none;
+}
+
+.album-hito-ledger-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 12px;
+}
+
+.album-hito-ledger-title span,
+.album-hito-card span,
+.card-viewer-hito-story span {
+  color: rgba(255, 225, 162, 0.68);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.album-hito-ledger-title strong {
+  color: #fff1bf;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+}
+
+.album-hito-ledger-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 12px;
+}
+
+.album-hito-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 168px;
+  padding: 14px;
+  border: 1px solid rgba(100, 224, 171, 0.18);
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, rgba(255, 230, 160, 0.07), rgba(0,0,0,0.2)),
+    rgba(13, 9, 5, 0.42);
+  box-shadow:
+    0 14px 24px rgba(0,0,0,0.22),
+    inset 0 1px 0 rgba(255,255,255,0.07);
+}
+
+.album-hito-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.28;
+  background:
+    radial-gradient(ellipse at 18% 24%, rgba(91, 231, 171, 0.2), transparent 44%),
+    linear-gradient(112deg, transparent 0 42%, rgba(255,255,255,0.1) 50%, transparent 62%);
+  transform: translateX(-16%);
+  pointer-events: none;
+}
+
+.album-hito-card-unlocked {
+  border-color: rgba(255, 211, 96, 0.38);
+  box-shadow:
+    0 18px 30px rgba(0,0,0,0.26),
+    0 0 36px rgba(255, 202, 84, 0.18),
+    inset 0 1px 0 rgba(255,255,255,0.1);
+  animation: hitoUnlockedBreath 4.8s ease-in-out infinite;
+}
+
+.album-hito-card h3 {
+  margin: 6px 0 7px;
+  color: #fff0bf;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20px;
+  line-height: 1.05;
+}
+
+.album-hito-card p,
+.album-hito-card small {
+  color: rgba(255, 241, 205, 0.68);
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.38;
+}
+
+.album-hito-progress {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0 8px;
+}
+
+.album-hito-progress strong {
+  color: #ffe7a2;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 22px;
+}
+
+.album-hito-progress span {
+  position: relative;
+  overflow: hidden;
+  height: 8px;
+  border-radius: 999px;
+  background: rgba(255, 235, 190, 0.12);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.34);
+}
+
+.album-hito-progress i {
+  display: block;
+  width: var(--hito-progress);
+  height: 100%;
+  border-radius: inherit;
+  background:
+    linear-gradient(90deg, rgba(86, 218, 164, 0.9), rgba(255, 215, 101, 0.88));
+  box-shadow: 0 0 18px rgba(96, 226, 168, 0.38);
+}
+
+.album-slot-empty-hito {
+  border-color: rgba(93, 218, 164, 0.42) !important;
+  background:
+    radial-gradient(ellipse at 50% 24%, rgba(93, 218, 164, 0.12), transparent 52%),
+    rgba(20, 15, 10, 0.65) !important;
+}
+
+.album-slot-empty-hito .album-slot-placeholder i {
+  box-shadow: 0 0 18px rgba(93, 218, 164, 0.34);
+}
+
+.card-viewer-hito-story {
+  margin-top: 16px;
+  padding: 14px;
+  border: 1px solid rgba(100, 224, 171, 0.22);
+  border-radius: 14px;
+  background:
+    radial-gradient(ellipse at 18% 0%, rgba(91, 231, 171, 0.12), transparent 54%),
+    rgba(10, 8, 5, 0.28);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+}
+
+.card-viewer-hito-story h4 {
+  margin: 7px 0;
+  color: #fff0bf;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 22px;
+}
+
+.card-viewer-hito-story p,
+.card-viewer-hito-story small {
+  color: rgba(255, 238, 204, 0.72);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.card-viewer-hito-story blockquote {
+  margin: 12px 0;
+  padding-left: 12px;
+  border-left: 2px solid rgba(255, 211, 96, 0.5);
+  color: rgba(255, 229, 164, 0.88);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 15px;
+  line-height: 1.4;
+}
+
+.card-viewer-hito-story strong {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 6px 9px;
+  border: 1px solid rgba(255, 211, 96, 0.26);
+  border-radius: 999px;
+  color: #ffe8a8;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+@keyframes hitoUnlockedBreath {
+  0%,
+  100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.065) saturate(1.06);
+  }
+}
+
+@media (max-width: 720px) {
+  .album-hito-ledger-title {
+    display: block;
+  }
+}
