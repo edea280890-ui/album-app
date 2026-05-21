@@ -1,4 +1,6 @@
-﻿import Image from "next/image";
+import Image from "next/image";
+import { useEffect } from "react";
+import { useCinematicAudio } from "@/context/CinematicAudioContext";
 
 type Props = {
   openingPack: boolean;
@@ -7,6 +9,14 @@ type Props = {
 export default function PackOpening({
   openingPack
 }: Props) {
+  const { playCue } = useCinematicAudio();
+
+  useEffect(() => {
+    if (openingPack) {
+      playCue("packTear");
+    }
+  }, [openingPack, playCue]);
+
   return (
     <div className="pack-opening-scene">
       <div className="pack-table-shadow"></div>

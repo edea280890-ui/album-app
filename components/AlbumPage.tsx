@@ -8,6 +8,7 @@ import {
   useRef,
   useState
 } from "react";
+import { useCinematicAudio } from "@/context/CinematicAudioContext";
 import { Card } from "../types/Card";
 import { masterCards } from "../data/cards";
 import { historicalHitos } from "../data/hitos";
@@ -130,6 +131,7 @@ export default function AlbumPage({
   album,
   onViewCard
 }: Props) {
+  const { playCue } = useCinematicAudio();
   const [recentlyPastedCode, setRecentlyPastedCode] =
     useState<string | null>(null);
   const previousAlbumCodes = useRef<Set<string> | null>(
@@ -150,6 +152,7 @@ export default function AlbumPage({
       );
 
       if (newCode) {
+        playCue("pasteSnap");
         setRecentlyPastedCode(newCode);
 
         const timeout = window.setTimeout(() => {
@@ -165,7 +168,7 @@ export default function AlbumPage({
     previousAlbumCodes.current = albumCodes;
 
     return undefined;
-  }, [albumCodes]);
+  }, [albumCodes, playCue]);
 
   const cardsFromPage = masterCards.filter(
     (card) =>

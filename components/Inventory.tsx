@@ -1,4 +1,5 @@
-﻿import Image from "next/image";
+import Image from "next/image";
+import { useCinematicAudio } from "@/context/CinematicAudioContext";
 import type { CSSProperties } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { getCardStyle } from "../lib/getCardStyle";
@@ -198,12 +199,17 @@ export default function Inventory({
   pasteCard,
   onInspectCard
 }: Props) {
+  const { playCue, setScene } = useCinematicAudio();
   const [activeFilter, setActiveFilter] =
     useState<InventoryFilter>("todas");
   const [settlingCardCode, setSettlingCardCode] =
     useState<string | null>(null);
   const pasteTimeout = useRef<number | null>(null);
   const settleTimeout = useRef<number | null>(null);
+
+  useEffect(() => {
+    setScene("figuritas");
+  }, [setScene]);
 
   useEffect(() => {
     return () => {
@@ -218,6 +224,7 @@ export default function Inventory({
   }, []);
 
   const handlePasteCard = (card: InventoryCard) => {
+    playCue("pasteLift");
     setSettlingCardCode(card.codigo);
 
     if (pasteTimeout.current) {
@@ -298,9 +305,10 @@ export default function Inventory({
           <button
             key={filter.id}
             type="button"
-            onClick={() =>
-              setActiveFilter(filter.id)
-            }
+            onClick={() => {
+              playCue("filterTap");
+              setActiveFilter(filter.id);
+            }}
             aria-pressed={activeFilter === filter.id}
             className={
               activeFilter === filter.id
@@ -400,7 +408,10 @@ export default function Inventory({
 
                       <button
                         className="inventory-card-image-button"
-                        onClick={() => onInspectCard(card)}
+                        onClick={() => {
+                          playCue("viewerOpen");
+                          onInspectCard(card);
+                        }}
                         aria-label={`Inspeccionar ${card.nombre}`}
                       >
                         <div

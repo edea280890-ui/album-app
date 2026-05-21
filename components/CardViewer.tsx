@@ -1,4 +1,6 @@
 import Image from "next/image";
+import { useEffect } from "react";
+import { useCinematicAudio } from "@/context/CinematicAudioContext";
 import { getHitoById } from "../data/hitos";
 import { getCardStyle } from "../lib/getCardStyle";
 import { Card } from "../types/Card";
@@ -20,6 +22,7 @@ export default function CardViewer({
   status,
   onClose
 }: Props) {
+  const { playCue } = useCinematicAudio();
   const style = getCardStyle(card);
   const hito = getHitoById(card.hitoId);
 
@@ -27,6 +30,27 @@ export default function CardViewer({
     .toLowerCase()
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "");
+
+  useEffect(() => {
+    if (card.rareza === "Legendaria") {
+      playCue("rareLegendary");
+      return;
+    }
+
+    if (card.rareza === "Hito" || card.rareza === "Combinable") {
+      playCue("rareHito");
+      return;
+    }
+
+    if (card.rareza === "Dorada") {
+      playCue("rareGold");
+      return;
+    }
+
+    if (card.rareza === "Especial") {
+      playCue("rareSpecial");
+    }
+  }, [card.rareza, playCue]);
 
   return (
     <div className={`card-viewer-overlay card-viewer-overlay-${rarityClass}`}>

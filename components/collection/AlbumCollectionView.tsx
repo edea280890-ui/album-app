@@ -1,21 +1,27 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import AlbumOpeningCinematic from "@/components/AlbumOpeningCinematic";
 import AlbumPage from "@/components/AlbumPage";
 import { ALBUM_PAGES } from "@/data/albumConfig";
 import { useAlbumGame } from "@/context/AlbumGameContext";
+import { useCinematicAudio } from "@/context/CinematicAudioContext";
 
 export default function AlbumCollectionView() {
   const searchParams = useSearchParams();
+  const { playCue, setScene } = useCinematicAudio();
   const router = useRouter();
   const [introDismissed, setIntroDismissed] =
     useState(false);
   const showIntro =
     !introDismissed &&
     searchParams.get("intro") === "1";
+
+  useEffect(() => {
+    setScene("album");
+  }, [setScene]);
 
   const finishIntro = () => {
     setIntroDismissed(true);
@@ -162,9 +168,10 @@ export default function AlbumCollectionView() {
           <button
             type="button"
             className="page-turn-button page-turn-button-left"
-            onClick={() =>
-              changeAlbumPage(previousPage, "previous")
-            }
+            onClick={() => {
+              playCue("pageTurn");
+              changeAlbumPage(previousPage, "previous");
+            }}
             aria-label="Pagina anterior"
           >
             &lt;
@@ -200,9 +207,10 @@ export default function AlbumCollectionView() {
                 <button
                   key={page}
                   type="button"
-                  onClick={() =>
-                    changeAlbumPage(page, direction)
-                  }
+                  onClick={() => {
+                    playCue("pageTurn");
+                    changeAlbumPage(page, direction);
+                  }}
                   className={tabClass}
                 >
                   <span className="album-page-tab-label">
@@ -220,9 +228,10 @@ export default function AlbumCollectionView() {
           <button
             type="button"
             className="page-turn-button page-turn-button-right"
-            onClick={() =>
-              changeAlbumPage(nextPage, "next")
-            }
+            onClick={() => {
+              playCue("pageTurn");
+              changeAlbumPage(nextPage, "next");
+            }}
             aria-label="Pagina siguiente"
           >
             &gt;

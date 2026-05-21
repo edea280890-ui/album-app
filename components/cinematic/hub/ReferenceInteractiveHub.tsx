@@ -1,8 +1,9 @@
-﻿"use client";
+"use client";
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import { useCinematicAudio } from "@/context/CinematicAudioContext";
 
 type HoverTarget = "album" | "sobres" | "figuritas" | null;
 type ExitMode = null | "album" | "sobres" | "figuritas";
@@ -45,12 +46,17 @@ export default function ReferenceInteractiveHub({
   fallbackHandlers
 }: Props) {
   const router = useRouter();
+  const { playCue, setScene } = useCinematicAudio();
   const [hovered, setHovered] =
     useState<HoverTarget>(null);
   const [exitMode, setExitMode] =
     useState<ExitMode>(null);
 
   const busy = exitMode !== null;
+
+  useEffect(() => {
+    setScene("home");
+  }, [setScene]);
 
   const hubClassName = [
     "argentina-historica-hub",
@@ -95,6 +101,8 @@ export default function ReferenceInteractiveHub({
         return;
       }
 
+      playCue(mode === "album" ? "bookOpen" : "objectSelect");
+
       setExitMode(mode);
 
       window.setTimeout(() => {
@@ -116,7 +124,7 @@ export default function ReferenceInteractiveHub({
         router.push(href);
       }, NAV_DELAY[mode]);
     },
-    [busy, fallbackHandlers, router]
+    [busy, fallbackHandlers, playCue, router]
   );
 
   return (
@@ -174,7 +182,10 @@ export default function ReferenceInteractiveHub({
           className="ah-object ah-collection-object"
           disabled={busy}
           aria-label="Abrir coleccion de figuritas"
-          onPointerEnter={() => setHovered("figuritas")}
+          onPointerEnter={() => {
+            setHovered("figuritas");
+            playCue("hover");
+          }}
           onPointerLeave={() => setHovered(null)}
           onClick={() => navigate("figuritas", "/figuritas")}
         >
@@ -239,7 +250,10 @@ export default function ReferenceInteractiveHub({
           className="ah-object ah-album-object"
           disabled={busy}
           aria-label="Abrir album Argentina Historica"
-          onPointerEnter={() => setHovered("album")}
+          onPointerEnter={() => {
+            setHovered("album");
+            playCue("hover");
+          }}
           onPointerLeave={() => setHovered(null)}
           onClick={() => navigate("album", "/album?intro=1")}
         >
@@ -271,7 +285,10 @@ export default function ReferenceInteractiveHub({
           className="ah-object ah-pack-stack"
           disabled={busy}
           aria-label="Abrir sobres Argentina Historica"
-          onPointerEnter={() => setHovered("sobres")}
+          onPointerEnter={() => {
+            setHovered("sobres");
+            playCue("hover");
+          }}
           onPointerLeave={() => setHovered(null)}
           onClick={() => navigate("sobres", "/sobres")}
         >

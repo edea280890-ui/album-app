@@ -1,9 +1,11 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useRef } from "react";
 
 import PackOpening from "@/components/PackOpening";
 import { useAlbumGame } from "@/context/AlbumGameContext";
+import { useCinematicAudio } from "@/context/CinematicAudioContext";
 
 const getRarityDelay = (rareza: string, index: number) => {
   const baseDelay = index * 0.42;
@@ -20,6 +22,8 @@ const getRarityDelay = (rareza: string, index: number) => {
 };
 
 export default function SobresCollectionView() {
+  const { playCue, setScene } = useCinematicAudio();
+  const lastRewardCode = useRef<string | null>(null);
   const {
     openingPack,
     showPack,
@@ -27,6 +31,10 @@ export default function SobresCollectionView() {
     setSelectedCard,
     handleOpenPack
   } = useAlbumGame();
+
+  useEffect(() => {
+    setScene("sobres");
+  }, [setScene]);
 
   const hasResults = packCards.length > 0 && !showPack;
   const rewardCard = packCards.find(
@@ -39,6 +47,31 @@ export default function SobresCollectionView() {
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
     : null;
+
+  useEffect(() => {
+    if (!rewardCard || lastRewardCode.current === rewardCard.codigo) {
+      return;
+    }
+
+    lastRewardCode.current = rewardCard.codigo;
+
+    if (rewardCard.rareza === "Legendaria") {
+      playCue("rareLegendary");
+      return;
+    }
+
+    if (rewardCard.rareza === "Hito") {
+      playCue("rareHito");
+      return;
+    }
+
+    playCue("rareGold");
+  }, [playCue, rewardCard]);
+
+  const openPackWithAudio = () => {
+    playCue("packTake");
+    void handleOpenPack();
+  };
 
   return (
     <section className="sobres-table-section section-transition">
@@ -103,7 +136,7 @@ export default function SobresCollectionView() {
           <button
             type="button"
             className="sobres-main-pack-button"
-            onClick={handleOpenPack}
+            onClick={openPackWithAudio}
             disabled={openingPack}
             aria-label="Abrir sobre"
           >

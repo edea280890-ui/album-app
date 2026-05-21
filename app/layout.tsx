@@ -1,7 +1,8 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 
 import { AlbumGameProvider } from "@/context/AlbumGameContext";
+import { CinematicAudioProvider } from "@/context/CinematicAudioContext";
 
 import "./globals.css";
 
@@ -31,7 +32,9 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <AlbumGameProvider>{children}</AlbumGameProvider>
+        <CinematicAudioProvider>
+          <AlbumGameProvider>{children}</AlbumGameProvider>
+        </CinematicAudioProvider>
       </body>
     </html>
   );

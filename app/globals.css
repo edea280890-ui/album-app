@@ -797,7 +797,7 @@ body {
 
 .album-page-complete::before {
 
-  content: "Ã¢Å“â€ COMPLETADA";
+  content: "ÃƒÂ¢Ã…â€œÃ¢â‚¬Â COMPLETADA";
 
   position: absolute;
 
@@ -1076,7 +1076,7 @@ body::before {
   text-shadow: 0 2px 8px black;
 }
 
-/* PilÃƒÂ³n de figuritas */
+/* PilÃƒÆ’Ã‚Â³n de figuritas */
 .sticker-card {
   position: absolute;
   width: 110px;
@@ -1103,7 +1103,7 @@ body::before {
   background: linear-gradient(135deg, #5a1d1d, #180909);
 }
 
-/* ÃƒÂlbum cerrado */
+/* ÃƒÆ’Ã‚Âlbum cerrado */
 .album-cover-object {
   position: absolute;
   width: 170px;
@@ -9401,7 +9401,7 @@ body::before {
   transform: rotate(-9deg);
 }
 
-/* Home interactiva: objetos fÃƒÂ­sicos sobre referencia */
+/* Home interactiva: objetos fÃƒÆ’Ã‚Â­sicos sobre referencia */
 .reference-interactive-hub .reference-tabletop-base {
   z-index: 0;
   pointer-events: none;
@@ -17622,5 +17622,292 @@ body::before {
 @media (max-width: 720px) {
   .album-hito-ledger-title {
     display: block;
+  }
+}
+/* Physical scale coherence pass */
+.argentina-historica-object-hub .ah-album-object {
+  width: clamp(320px, 34vw, 520px);
+}
+
+.argentina-historica-object-hub .ah-pack-stack {
+  right: clamp(18px, 5vw, 84px);
+  top: clamp(188px, 31vh, 292px);
+  width: clamp(210px, 22vw, 340px);
+}
+
+.argentina-historica-object-hub .ah-pack-photo {
+  width: 55%;
+  height: 76%;
+}
+
+.argentina-historica-object-hub .ah-collection-object {
+  left: clamp(18px, 4.4vw, 78px);
+  top: clamp(188px, 31vh, 284px);
+  width: clamp(220px, 24vw, 350px);
+}
+
+.argentina-historica-object-hub .ah-preview-stack {
+  left: 20%;
+  bottom: 5%;
+  width: 48%;
+  height: 56%;
+}
+
+.argentina-historica-object-hub .ah-preview-card {
+  width: 50%;
+  height: 78%;
+  border-width: 4px;
+}
+
+.ah-loose-preview-card {
+  left: -24%;
+  bottom: -4%;
+  width: 42%;
+  height: 62%;
+  border-width: 3px;
+}
+
+.sobres-main-pack-button {
+  width: min(360px, 68vw);
+}
+
+.sobres-side-stack {
+  width: 230px;
+  height: 330px;
+}
+
+.sobres-side-pack-wrap {
+  width: 176px;
+}
+
+.sobres-opening-wrap {
+  min-height: 650px;
+}
+
+.sobres-opening-wrap .real-pack,
+.real-pack {
+  width: 300px;
+  height: 420px;
+}
+
+.real-pack-flap {
+  width: 300px;
+}
+
+.emerging-card {
+  width: 168px;
+  height: 242px;
+  left: 66px;
+  bottom: 86px;
+  border-radius: 13px;
+}
+
+.sobres-opening-wrap .emerging-card {
+  box-shadow:
+    0 30px 48px rgba(0, 0, 0, 0.52),
+    0 0 0 1px rgba(255, 255, 255, 0.14),
+    inset 0 0 0 2px rgba(161, 111, 26, 0.26);
+}
+
+@keyframes cardEmergeA {
+  0% {
+    opacity: 0;
+    transform: translateY(112px) rotate(0deg) scale(0.56);
+  }
+
+  58% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-116px, -204px) rotate(-17deg) scale(0.92);
+  }
+}
+
+@keyframes cardEmergeB {
+  0% {
+    opacity: 0;
+    transform: translateY(112px) rotate(0deg) scale(0.56);
+  }
+
+  58% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, -236px) rotate(1deg) scale(0.98);
+  }
+}
+
+@keyframes cardEmergeC {
+  0% {
+    opacity: 0;
+    transform: translateY(112px) rotate(0deg) scale(0.56);
+  }
+
+  58% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(116px, -204px) rotate(17deg) scale(0.92);
+  }
+}
+
+@keyframes cardEmergeD {
+  0% {
+    opacity: 0;
+    transform: translateY(112px) rotate(0deg) scale(0.56);
+  }
+
+  58% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(-52px, -272px) rotate(-7deg) scale(0.86);
+  }
+}
+
+@keyframes cardEmergeE {
+  0% {
+    opacity: 0;
+    transform: translateY(112px) rotate(0deg) scale(0.56);
+  }
+
+  58% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(52px, -272px) rotate(8deg) scale(0.86);
+  }
+}
+
+.pack-result-grid,
+.sobres-result-grid {
+  grid-template-columns: repeat(auto-fit, minmax(178px, 210px));
+  gap: clamp(14px, 1.6vw, 20px);
+}
+
+.pack-card-reveal,
+.sobres-card-reveal {
+  min-height: 362px;
+  padding: 11px;
+  border-radius: 16px;
+}
+
+.pack-card-image,
+.inventory-card-image {
+  height: 220px;
+}
+
+.pack-card-image-shell {
+  margin-bottom: 10px;
+}
+
+.pack-card-reveal h3 {
+  min-height: 40px;
+  font-size: 17px;
+}
+
+.pack-card-rarity,
+.pack-card-kind,
+.pack-card-code {
+  font-size: 10px;
+}
+
+.inventory-card-stack {
+  gap: 20px 14px;
+}
+
+.inventory-physical-card {
+  width: 190px;
+  min-height: 352px;
+  padding: 10px 10px 12px;
+  border-radius: 16px;
+}
+
+.inventory-physical-card h3 {
+  font-size: 17px;
+  line-height: 1.1;
+}
+
+.inventory-card-meta,
+.inventory-card-stats {
+  font-size: 10px;
+}
+
+.inventory-paste-button {
+  min-height: 36px;
+  font-size: 11px;
+}
+
+.inventory-card-repeated .inventory-copy-band {
+  top: 100px;
+}
+
+@media (max-width: 980px) {
+  .argentina-historica-object-hub .ah-album-object {
+    width: min(53vw, 320px);
+  }
+
+  .argentina-historica-object-hub .ah-collection-object {
+    width: 31vw;
+    min-width: 132px;
+  }
+
+  .argentina-historica-object-hub .ah-pack-stack {
+    width: 31vw;
+    min-width: 132px;
+  }
+
+  .inventory-physical-card {
+    width: min(190px, 100%);
+  }
+}
+
+@media (max-width: 720px) {
+  .sobres-opening-wrap {
+    min-height: 560px;
+  }
+
+  .sobres-opening-wrap .pack-opening-scene {
+    transform: scale(0.84);
+    transform-origin: top center;
+  }
+
+  .pack-result-grid,
+  .sobres-result-grid {
+    grid-template-columns: repeat(auto-fit, minmax(164px, 190px));
+  }
+}
+
+@media (max-width: 560px) {
+  .argentina-historica-object-hub .ah-album-object {
+    width: min(68vw, 260px);
+  }
+
+  .argentina-historica-object-hub .ah-collection-object,
+  .argentina-historica-object-hub .ah-pack-stack {
+    width: 38vw;
+  }
+
+  .sobres-main-pack-button {
+    width: min(292px, 78vw);
+  }
+
+  .inventory-physical-card {
+    width: min(176px, 100%);
+  }
+
+  .pack-card-image,
+  .inventory-card-image {
+    height: 204px;
   }
 }

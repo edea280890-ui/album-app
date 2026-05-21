@@ -53,6 +53,10 @@ export type ProgressionSnapshot = {
   nextIncompletePageCompleted: number;
   nextIncompletePageTotal: number;
   completionLabel: string;
+  hitoProgress: HitoProgressSnapshot[];
+  nextHitoTitle: string;
+  nextHitoCompleted: number;
+  nextHitoTotal: number;
 };
 
 const loadStoredCards = (key: string): Card[] => {
@@ -329,7 +333,11 @@ export function AlbumGameProvider({
       nextIncompletePageCompleted:
         getPageCompletedCount(nextIncompletePage),
       nextIncompletePageTotal: nextIncompletePageCards.length,
-      completionLabel
+      completionLabel,
+      hitoProgress,
+      nextHitoTitle: nextHito?.titulo ?? "Hitos completos",
+      nextHitoCompleted: nextHito?.completedParts ?? 0,
+      nextHitoTotal: nextHito?.totalParts ?? 0
     };
   }, [album, cards, getPageCards, getPageCompletedCount]);
 
